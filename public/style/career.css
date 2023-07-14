@@ -1,0 +1,106 @@
+body {
+    font-family: "Roboto", Arial, sans-serif;
+}
+#firstImg{
+    height: 600px;
+}
+.mainField{
+    margin-left: 30px;
+}
+.cont{
+    background-color: white;
+    height: 600px;
+}
+.pad{
+    padding: 100px;
+}
+
+ a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+ .logg{
+     height: fit-content;
+     width: fit-content;
+     background-color: #4981d2;
+     padding: 8px;
+     color: white;
+     border-radius: 10px;
+     margin-top: -20px;
+ }
+
+.logg:hover {
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4)
+}
+.dogg{
+    height: fit-content;
+    width: fit-content;
+    background-color: #cc8925;
+    padding: 8px;
+    color: white;
+    border-radius: 10px;
+    margin-top: -20px;
+}
+
+.dogg:hover {
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4)
+}
+
+.deg {
+    position: relative;
+    text-decoration: none;
+    color: #000;
+}
+
+.deg:before {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    margin-left: 0px;
+    height: 5px;
+    background-color: #268a1f;
+    transition: width 0.3s ease-in-out;
+}
+
+.deg:hover:before {
+    width: 100%;
+}
+.sttext{
+    font: 14px 'MutatorSans', sans-serif;
+    font-weight: 500;
+}
+.container {
+    display: flex;
+}
+
+.left-column,
+.right-column {
+    width: 25%;
+    background-color: #f0f0f0;
+    border: black 2px solid;
+}
+
+.center-column {
+    flex-grow: 1;
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-row,
+.bottom-row {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.top-row {
+    background-color: #d0d0d0;
+}
+
+.bottom-row {
+    background-color: #c0c0c0;
+}
