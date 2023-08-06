@@ -1,6 +1,6 @@
 @extends('dashboard.dashboard')
 @section('content')
-    <div class="m-4 position-relative">
+    <div class=" position-relative" style="margin: -20px">
         <div class=" d-flex justify-content-center pad">
             <div>
                 <img id="firstImg" src="{{ asset('/images/img.png') }}" alt="card image">
@@ -9,18 +9,16 @@
                 <div class="container-fluid cont">
                     <div class="p-2">
                         <h2 class="d-flex justify-content-center">Career Hunt</h2>
-                        <h6 class=" d-flex justify-content-center">place to get the answer for your career</h6>
+                        <h6 class=" d-flex justify-content-center" style="color: orange">Place to get the answer for your career</h6>
                         <div>
-                            <p>Log in OR Sign up <br> Using</p>
-                            <button class="form-control bg-danger">GOOGLE</button>
-                            <button class="form-control bg-info">LINKEDIN</button>
-                            <button class="form-control bg-black">GITHUB</button>
+                            <p class="d-flex justify-content-center mt-5"  style="font-weight: bold">Log in </p>
+                            <a class="form-control bg-danger d-flex justify-content-center " href="{{ route('googleSignin') }}"><i class="bi-google" style="color: yellow; font-size: 25px"></i></a>
+                            <a class="form-control d-flex justify-content-center" style="background-color: skyblue"><i class="bi-linkedin " style="color: darkblue ; font-size: 25px"></i></a>
+                            <a class="form-control bg-black d-flex justify-content-center"><i class="bi-github text-light" style="font-size: 25px"></i></a>
                         </div>
                         <div>
-                            <p>Don't Have? Create one </p>
-                            <button class="form-control bg-danger">GOOGLE</button>
-                            <button class="form-control bg-info">LINKEDIN</button>
-                            <button class="form-control bg-black">GITHUB</button>
+                            <p class="d-flex justify-content-center mt-5"> OR</p>
+                            <p>Don't Have? Create one<a href="{{ route('signup') }}" class="text-info">&nbsp;&nbsp;Sign-up</a></p>
                         </div>
 
 
