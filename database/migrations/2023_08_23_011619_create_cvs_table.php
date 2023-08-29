@@ -11,23 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_profiles', function (Blueprint $table) {
+        Schema::create('cvs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->string('fullname')->nullable();
+            $table->string('email')->nullable();
+            $table->string('title')->nullable();
             $table->string('location')->nullable();
             $table->string('contact_number')->nullable();
-            $table->string('skills')->nullable();
+            $table->string('language')->nullable();
+            $table->longText('objective')->nullable();
+            $table->longText('skills')->nullable();
+            $table->longText('experience')->nullable();
             $table->longText('education')->nullable();
-            $table->string('college_name')->nullable();
+            $table->longText('projects')->nullable();
+            $table->longText('certification_training')->nullable();
+            $table->string('linkedin_link')->nullable();
+            $table->string('github_link')->nullable();
             $table->string('image_name')->nullable();
             $table->string('image_path')->nullable();
-            $table->string('cv_path')->nullable();
-            $table->longText('about')->nullable();
-            $table->longText('experience')->nullable();
-            $table->string('linkedin_link')->nullable();
             $table->timestamps();
         });
     }
@@ -37,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_profiles');
+        Schema::dropIfExists('cvs');
     }
 };

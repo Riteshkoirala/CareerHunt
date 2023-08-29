@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Assessment\AssessmentController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Cv\CvController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Frontend\Comment\CommentController;
 use App\Http\Controllers\Frontend\Post\PostController;
 use App\Http\Controllers\Profile\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +38,13 @@ Route::get('additional-links', function (){
 })->name('resource');
 
 Route::resource('post', PostController::class);
+Route::resource('assessment', AssessmentController::class);
 Route::resource('profile', UserProfileController::class);
+Route::resource('cv', CvController::class);
+Route::resource('comment',CommentController::class);
+
+Route::get('cv-pdf', [CvController::class,'getPDF'])->name('preview.pdf');
+
 Route::get('post-attachment/{id}', [PostController::class,'attachmentDestroy'])->name('attachment-destroy');
 
 

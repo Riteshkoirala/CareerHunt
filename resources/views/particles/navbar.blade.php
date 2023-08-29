@@ -1,4 +1,7 @@
-<div id="" class="fixed position-sticky bg-white" style="height:fit-content; width: 100%; box-shadow: 5px 5px 5px 5px whitesmoke ">
+<div class="p-2 d-flex justify-content-center text-white" style="background-color: #5294f3">Unlock Your Path to Success: Navigate Your Career Hunt with Confidence!. A guidance to the better career.
+</div>
+<div id="" class="position-sticky fixed-top bg-white" style="height:fit-content; box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.5); width: 100%;">
+
     <div class="p-4">
         <h1 class="text-dark">
             <img src="{{ asset('/images/img_1.png') }}" style="width: 250px">
@@ -10,7 +13,7 @@
             <li class="deg" >
                 <a href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
             </li>
-            @if(Auth::user() == true)
+{{--            @if(Auth::user() == true)--}}
                 <li class="deg" >
                     <a href="/">&nbsp;&nbsp;Recommendation&nbsp;&nbsp;</a>
                 </li>
@@ -20,11 +23,16 @@
                 <li class="deg" >
                     <a href="{{ route('resource') }}">&nbsp;&nbsp;Learn-Grow&nbsp;&nbsp;</a>
                 </li>
-            @endif
+{{--            @endif--}}
             <li class="deg" >
                 <a href="{{ route('post.index') }}">&nbsp;&nbsp;Discussion&nbsp;&nbsp;</a>
             </li>
-
+            <li class="deg" >
+                <a href="{{ route('assessment.index') }}">&nbsp;&nbsp;Assessment&nbsp;&nbsp;</a>
+            </li>
+            <li class="deg" >
+                <a href="{{ route('cv.index') }}">&nbsp;&nbsp;CV&nbsp;&nbsp;</a>
+            </li>
             <li class="deg" >
                 <a href="/">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
             </li>

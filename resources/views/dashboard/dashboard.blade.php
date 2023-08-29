@@ -7,6 +7,8 @@
     <link href="{{ asset('/plugin/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" crossorigin="anonymous">    <link href="{{ asset('/style/career.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="{{ asset('ckeditor/adapters/jquery.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('croppie/croppie.css') }}" />
 
     <!-- Modal -->
     <link rel="stylesheet" href=
@@ -16,13 +18,13 @@
     <title>Career Hunt</title>
 </head>
 <body>
-<div class="p-2 d-flex justify-content-center text-white" style="background-color: #5294f3">Unlock Your Path to Success: Navigate Your Career Hunt with Confidence!. A guidance to the better career.
-</div>
+
 
     @include('particles.navbar')
     <div>
     @yield('content')
     </div>
+    @yield('script')
 
 <div>
     @include('particles.footer')

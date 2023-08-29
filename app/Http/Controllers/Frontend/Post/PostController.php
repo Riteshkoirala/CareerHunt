@@ -18,19 +18,19 @@ class PostController extends Controller
      */
     public function index()
     {
-        if (Auth::user()) {
-            $logUser = UserProfile::where('user_id', Auth::user()->id)->first();
-            if ($logUser) {
+//        if (Auth::user()) {
+//            $logUser = UserProfile::where('user_id', Auth::user()->id)->first();
+//            if ($logUser) {
                 $posts = Post::latest()->filter(request(['search']))->get();
-                return view('discussion.index', ['posts' => $posts]);
-            } else {
-                return view('profile.create');
-            }
-        }
-        else{
-            $posts = Post::latest()->filter(request(['search']))->get();
-            return view('discussion.index', ['posts' => $posts]);
-        }
+                return view('discussion.index', compact('posts'));
+//            } else {
+//                return view('profile.create');
+//            }
+//        }
+//        else{
+//            $posts = Post::latest()->filter(request(['search']))->get();
+//            return view('discussion.index', ['posts' => $posts]);
+//        }
 
     }
 

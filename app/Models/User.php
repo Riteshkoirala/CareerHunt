@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Cv\Cv;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function userProfile():HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function userCv():HasOne
+    {
+        return $this->hasOne(Cv::class, 'id', 'user_id');
     }
 }
