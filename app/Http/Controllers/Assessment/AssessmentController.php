@@ -3,12 +3,30 @@
 namespace App\Http\Controllers\Assessment;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assessment\Assessment;
 
 class AssessmentController extends Controller
 {
     public function index()
     {
         return view('assessment.index');
+
+    }
+    public function easy()
+    {
+        $easy = Assessment::where('label', 'easy')->inRandomOrder()->limit(5)->get();
+        return view('assessment.easy-mode', compact('easy'));
+    }
+    public function intermediate()
+    {
+        $intermediate = Assessment::where('label', 'intermediate')->inRandomOrder()->limit(5)->get();
+        return view('assessment.intermediate-mode', compact('intermediate'));
+
+    }
+    public function hard()
+    {
+        $hard = Assessment::where('label', 'hard')->inRandomOrder()->limit(5)->get();
+        return view('assessment.hard-mode', compact('hard'));
 
     }
 

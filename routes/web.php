@@ -44,6 +44,10 @@ Route::resource('cv', CvController::class);
 Route::resource('comment',CommentController::class);
 
 Route::get('cv-pdf', [CvController::class,'getPDF'])->name('preview.pdf');
+Route::get('easy-mode/od23h2i32b53b45i3b53iu4', [AssessmentController::class,'easy'])->name('easy');
+Route::get('intermediate-mode/094238753837289349hyy2uguyc', [AssessmentController::class,'intermediate'])->name('intermediate');
+Route::get('hard-mode/cniwbncwviewbv9080w890we', [AssessmentController::class,'hard'])->name('hard');
+
 
 Route::get('post-attachment/{id}', [PostController::class,'attachmentDestroy'])->name('attachment-destroy');
 

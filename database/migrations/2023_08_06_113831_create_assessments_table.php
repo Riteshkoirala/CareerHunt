@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('assessments', function (Blueprint $table) {
             $table->id();
             $table->string('question');
-            $table->string('choose1ans');
-            $table->string('choose2ans');
-            $table->string('choose3ans');
-            $table->string('choose4ans');
+            $table->string('coding')->nullable();
+            $table->string('choose');
             $table->string('answer');
             $table->string('label');
             $table->timestamps();
