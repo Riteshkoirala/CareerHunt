@@ -27,7 +27,7 @@
                 <div class="d-flex justify-content-evenly">
                     <div class="col-md-4">
                         <label for="fullname" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name">
+                        <input type="text" class="form-control" id="fullname"  name="fullname" placeholder="Full Name">
                     </div>
                     <div class="col-md-4">
                         <label for="email" class="form-label">Email</label>

@@ -15,6 +15,10 @@ class CvController extends Controller
      */
     public function index()
     {
+        $cvData = Cv::where('user_id',1)->first();
+        if ($cvData){
+            return view('cv.edit',compact('cvData'));
+        }
         return view('cv.create');
     }
 
@@ -76,10 +80,12 @@ class CvController extends Controller
 
     public function getPDF()
     {
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('cv.cvpdf');
-
-        return $pdf->stream();
+//        $pdf = App::make('dompdf.wrapper');
+//        $pdf->loadView('cv.cvpdf');
+//
+//        return $pdf->stream();
+        $cvData = Cv::where('user_id',1)->first();
+        return view('cv.cvpdf',compact('cvData'));
     }
 
 }

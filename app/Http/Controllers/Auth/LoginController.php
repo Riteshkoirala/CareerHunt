@@ -70,6 +70,9 @@ class LoginController extends Controller
         $cre['email'] = $user->email;
         $cre['password']= $request->otp;
 
+        $user = User::where('email','=',$user->email)->first();
+        $user->update(['email_verified_at' => now()]);
+
         if($cre){
         Auth::login($user, true);
         $redirectRoute =  RouteServiceProvider::HOME;
