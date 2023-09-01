@@ -7,6 +7,7 @@
             });
         </script>
     @endif
+
     <div class="container mb-5" style="margin-top: 40px; width: 100%; padding-left: 0; padding-right: 0;">
         <div class="left-column m-2 p-2 position-sticky fixed-top" style="height: 200px">
             Left Column

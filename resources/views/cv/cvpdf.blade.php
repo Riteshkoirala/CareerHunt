@@ -48,7 +48,7 @@
 
         <div class="d-flex">
             <div class="fes">
-                <img src="{{ asset('images/img_1.png') }}" width="150px" height="150px">
+                <img class="me-4" src="{{ asset('storage/cv/'.$cvData->image_name) }}" alt="cv image" height="190px" width="190px">
             </div>
             <div style="width: 100%">
 <div class="des">
@@ -67,6 +67,7 @@
             </div>
         </div>
         @endif
+            @if($cvData->image_name == null)
 
             <div class="des">
                 <h2>{{ $cvData->fullname }}</h2>
@@ -78,6 +79,7 @@
                 <p class="parag">{!! $cvData->objective !!}</p>
                 <hr style="border: 1px solid blue; color: blue">
             </div>
+            @endif
             @endif
         <div class="d-flex" style="margin-top: -30px">
         <div class="column column-20 p-4">

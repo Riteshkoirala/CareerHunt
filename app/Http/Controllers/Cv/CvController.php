@@ -6,6 +6,7 @@ use App;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCvRequest;
 use App\Http\Requests\UpdateCvRequest;
+use App\Http\Services\ImageSaver;
 use App\Models\Cv\Cv;
 
 class CvController extends Controller
@@ -33,9 +34,13 @@ class CvController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCvRequest $request)
+    public function store(StoreCvRequest $request, ImageSaver $imageSaver)
     {
         $dataValidate = $request->validated();
+        if($request->has('image')) {
+            $imageName = $imageSaver->imageStore($dataValidate, 'cv');
+            $dataValidate['image_name'] = $imageName;
+        }
         $cv = CV::where('user_id', 1)->first();
         if ($cv) {
             $cv->update($dataValidate);

@@ -40,6 +40,7 @@ class StoreCvRequest extends FormRequest
             'image_name'=>'nullable|string',
             'image_path'=>'nullable|string',
             'updated_at'=>'nullable',
+            'cropped_image_name'=>'nullable',
         ];
     }
 }
