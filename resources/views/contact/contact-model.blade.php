@@ -9,7 +9,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Increase the width by adding 'modal-xl' class -->
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Add New Exiting Post</h3>
+                <h3>Contact US</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="model-body p-3">
@@ -35,7 +35,7 @@
                     <p><span class="text-danger">@error('contact_message') {{ $message }} @enderror</span></p>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
                     </div>
                 </form>
             </div>

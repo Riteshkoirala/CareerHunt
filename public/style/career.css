@@ -855,7 +855,7 @@ a{
     transform: scale(1.06); /* Scale up the element when hovered over */
 }
 .course {
-    max-width: 200px;
+    width: 200px;
     height: auto;
     padding: 10px;
     border-radius: 10px;
@@ -872,11 +872,15 @@ a{
 .listing{
     width: 20%;
     margin: 10px;
+    background-color: #bd7206;
+    color: white;
 }
 .glower:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-
+.course{
+    box-shadow: 0 0 10px lightgray;
+}
 .course:hover{
     box-shadow: 0 0 10px rgba(0, 0, 100, 0.5);
 }
@@ -911,4 +915,40 @@ a{
     width: 100%;
     height: fit-content;
     padding: 10px;
+}
+.place {
+    position: relative;
+    display: inline-block;
+}
+
+.ellipsis {
+    width: 2px;
+    height: 2px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.options {
+    display: none;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.place:hover .options {
+    display: block;
+}
+
+.edit,
+.delete {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+}
+
+.edit:hover,
+.delete:hover {
+    background-color: lightgray;
 }

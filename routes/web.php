@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdditionalResourceController;
 use App\Http\Controllers\Assessment\AssessmentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
@@ -39,9 +40,7 @@ Route::get('login-Auth/{user}',[LoginController::class, 'loginAuthenticate'])->n
 Route::get('logout', [LoginController::class, 'destroy'])
     ->name('logout');
 
-Route::get('additional-links', function (){
-   return view('additional-resourse.index') ;
-})->name('resource');
+
 
 Route::resource('post', PostController::class);
 Route::resource('assessment', AssessmentController::class);
@@ -49,6 +48,7 @@ Route::resource('profile', UserProfileController::class);
 Route::resource('cv', CvController::class);
 Route::resource('comment',CommentController::class);
 Route::resource('contact', ContactController::class);
+Route::resource('additional-resource', AdditionalResourceController::class);
 
 Route::get('cv-pdf', [CvController::class,'getPDF'])->name('preview.pdf');
 Route::get('easy-mode/od23h2i32b53b45i3b53iu4', [AssessmentController::class,'easy'])->name('easy');

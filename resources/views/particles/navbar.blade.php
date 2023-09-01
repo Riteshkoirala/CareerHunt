@@ -22,7 +22,7 @@
                     <a href="/">&nbsp;&nbsp;CV&nbsp;&nbsp;</a>
                 </li>
                 <li class="deg" >
-                    <a href="{{ route('resource') }}">&nbsp;&nbsp;Learn-Grow&nbsp;&nbsp;</a>
+                    <a href="{{ route('additional-resource.index') }}">&nbsp;&nbsp;Learn-Grow&nbsp;&nbsp;</a>
                 </li>
 {{--            @endif--}}
             <li class="deg" >
