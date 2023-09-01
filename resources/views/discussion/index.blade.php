@@ -1,6 +1,6 @@
 @extends('dashboard.dashboard')
 @section('content')
-    @if ($errors->any())
+    @if ($errors->has('title') || $errors->has('message'))
         <script>
             $(document).ready(function () {
                 $('#exampleModal').modal('show');
@@ -24,12 +24,12 @@
                                href="{{ route('post.index') }}"> Reset</a>
                         </div>
                     </form>
-                    {{--                    @if(Auth::user() == true)--}}
+                                        @if(Auth::user() == true)
                     <p style="font-weight: bold">Have something on your mind? post now Click here?</p>
                     <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="bg-primary
                     rounded p-2 text-light ml-2 adPo" style="width: 500px; cursor: pointer">+ Post</a>
                     @include('discussion.addPost-model')
-                    {{--                    @endif--}}
+                                        @endif
 
                 </div>
             </div>
@@ -46,8 +46,8 @@
                                               style="font-weight: bold; font-size: 15px;">Ritesh Koirala</span>
                                         <em style="margin-top:20px; margin-left: -110px; font-size: 10px;">{{ $post->created_at->diffForHumans() }}
                                             <i class="bi-globe text-danger"></i></em></div>
-                                    {{--                                @if(Auth::user())--}}
-                                    {{--                                    @if(Auth::user()->id == $post->user_id)--}}
+                                                                    @if(Auth::user())
+                                                                        @if(Auth::user()->id == $post->user_id)
                                     <div class="d-flex"><a class="eddd"
                                                            data-bs-toggle="modal"
                                                            data-bs-target="#exampleE-{{ $post->id }}"
@@ -62,8 +62,8 @@
                                                     type="submit"><i class="bi-trash text-danger"></i></button>
                                         </form>
                                     </div>
-                                    {{--                                    @endif--}}
-                                    {{--                                @endif--}}
+                                                                        @endif
+                                                                    @endif
 
                                     {{--                            <i class="bi-trash text-danger"></i></a></span>--}}
 
@@ -85,7 +85,7 @@
                                             @if ($post->postImages->count() > 0)
                                             <div style="background-color: lightgrey;" class="p-3">
                                                 @else
-                                                    <div>
+                                                    <>
                                             @endif
                                             <div>
                                                 @foreach($post->postImages as $images)
@@ -122,20 +122,20 @@
                                             </div>
                                             <div>
                                             </div>
-                                        </div>
+                                            </div>
                                     </a>
                                 </div>
                                 <div class="mt-4">
                                     <div class="d-flex justify-content-center" style="width: 100%">
-                                        <div class="d-flex justify-content-center"
-                                             style="width: 100%; border: 1px solid black; border-radius: 20px"><span
+                                        <div class="d-flex justify-content-center post"
+                                             style="width: 100%; border: 1px solid black; border-radius: 20px" data-post-id="{{ $post->id }}"><span
                                                 class="count1"></span>
                                             <button class="button1" style="border: none"><i
                                                     class="bi-hand-thumbs-up-fill text-info"></i>Like
                                             </button>
                                         </div>
-                                        <div class="d-flex justify-content-center"
-                                             style="width: 100%; border: 1px solid black; border-radius: 20px"><span
+                                        <div class="d-flex justify-content-center post"
+                                             style="width: 100%; border: 1px solid black; border-radius: 20px" data-post-id="{{ $post->id }}"><span
                                                 class="count2">0</span>
                                             <button class="button2" style="border: none"><i
                                                     class="bi-hand-thumbs-down-fill text-danger"></i>Unlike
@@ -199,14 +199,14 @@
                                 </div>
                                                 @endforeach
                                     </div>
-
-                                    <div>
+                        <div>
                                     @include('discussion.see-post-modal')
                                         @if($post->postComment != null)
                                         <a data-bs-toggle="modal" data-bs-target="#allPost" class=" adPo p-1"
                                        style="width: 500px; cursor: pointer; font-size: 13px">{{$mes}}</a>
                                         @endif
-                                    <form method="post" action="{{ route('comment.store') }}">
+                            @if(Auth::user() == true)
+                            <form method="post" action="{{ route('comment.store') }}">
                                         @csrf
                                         <div class="input-group">
                                             <input type="text" class="form-control"
@@ -223,9 +223,11 @@
                                                 ></i></button>
                                         </div>
                                     </form>
+                            @endif
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
         @endforeach
@@ -297,6 +299,6 @@
             });
 
 
-        });
+
     </script>
 @endsection

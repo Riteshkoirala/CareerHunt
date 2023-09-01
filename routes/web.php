@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Assessment\AssessmentController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Cv\CvController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Frontend\Comment\CommentController;
@@ -23,8 +24,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[DashboardController::class,'index'])->name('Home');
 Route::get('/login',[LoginController::class,'index'])->name('loign');
 Route::get('/Signup',[LoginController::class,'Signup'])->name('signup');
-Route::get('/google-Sign-in',[LoginController::class,'signInGoogle'])->name('googleSignin');
+Route::get('/google-Sign-in',[LoginController::class,'signInGoogle'])->name('googleSignIn');
+Route::get('/github-sign-in',[LoginController::class,'gitRedirect'])->name('githubSignIn');
+Route::get('/linkedin-sign-in',[LoginController::class,'linkRedirect'])->name('linkedinSignIn');
 Route::get('google',[LoginController::class, 'getData'])->name('google');
+Route::get('/github',[LoginController::class, 'getGitData'])->name('github');
+Route::get('/linkedin',[LoginController::class, 'getLinkData'])->name('linkedin');
+
 Route::get('/lock-first-code/{user}',[LoginController::class,'FirstLoginCode'])->name('logFirCode');
 
 Route::get('login-Auth/{user}',[LoginController::class, 'loginAuthenticate'])->name('login-Auth');
@@ -42,6 +48,7 @@ Route::resource('assessment', AssessmentController::class);
 Route::resource('profile', UserProfileController::class);
 Route::resource('cv', CvController::class);
 Route::resource('comment',CommentController::class);
+Route::resource('contact', ContactController::class);
 
 Route::get('cv-pdf', [CvController::class,'getPDF'])->name('preview.pdf');
 Route::get('easy-mode/od23h2i32b53b45i3b53iu4', [AssessmentController::class,'easy'])->name('easy');

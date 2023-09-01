@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
+use App\Http\Services\LoginCheck;
 use App\Http\Services\Post\PostCreation;
 use App\Models\Post\Post;
 use App\Models\Post\PostImage;
@@ -18,20 +19,8 @@ class PostController extends Controller
      */
     public function index()
     {
-//        if (Auth::user()) {
-//            $logUser = UserProfile::where('user_id', Auth::user()->id)->first();
-//            if ($logUser) {
-                $posts = Post::latest()->filter(request(['search']))->get();
-                return view('discussion.index', compact('posts'));
-//            } else {
-//                return view('profile.create');
-//            }
-//        }
-//        else{
-//            $posts = Post::latest()->filter(request(['search']))->get();
-//            return view('discussion.index', ['posts' => $posts]);
-//        }
-
+      $posts = Post::latest()->filter(request(['search']))->get();
+      return view('discussion.index', compact('posts'));
     }
 
     /**

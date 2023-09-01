@@ -36,5 +36,14 @@ return [
         'client_secret' => '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',
         'redirect' => 'http://localhost/google',
     ],
-
+    'github'=>[
+        'client_id' => 'b4eeff355085cae931f0',
+        'client_secret' => 'c757110241490e056280ff8a956b47cddb3e590c',
+        'redirect' => 'http://localhost/github',
+    ],
+    'linkedin'=>[
+        'client_id' => '8686mo1jbkdxqs',
+        'client_secret' => 'bIt4iY8SjF4722cj',
+        'redirect' => 'http://localhost/linkedin',
+    ],
 ];

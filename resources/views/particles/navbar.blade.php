@@ -1,5 +1,6 @@
 <div class="p-2 d-flex justify-content-center text-white" style="background-color: #5294f3">Unlock Your Path to Success: Navigate Your Career Hunt with Confidence!. A guidance to the better career.
 </div>
+@include('contact.contact-model')
 <div id="" class="position-sticky fixed-top bg-white" style="height:fit-content; box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.5); width: 100%;">
 
     <div class="p-4">
@@ -34,7 +35,7 @@
                 <a href="{{ route('cv.index') }}">&nbsp;&nbsp;CV&nbsp;&nbsp;</a>
             </li>
             <li class="deg" >
-                <a href="/">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
+                <a data-bs-toggle="modal" data-bs-target="#contactModel" data-bs-backdrop="static">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
             </li>
         </ul>
     </div>

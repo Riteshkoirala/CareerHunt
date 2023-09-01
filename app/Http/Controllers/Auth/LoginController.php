@@ -25,10 +25,36 @@ class LoginController extends Controller
         return Socialite::driver('google')
             ->redirect();
     }
+    public function gitRedirect() {
+        return Socialite::driver('github')
+            ->redirect();
+    }
+    public function linkRedirect() {
+        return Socialite::driver('linkedin')
+            ->redirect();
+    }
+    public function getLinkData()
+    {
+        $user = Socialite::driver('linkedin')->stateless()->user();
+        $user = $this->process($user);
+        return redirect()->route('logFirCode', ['user' => $user]);
 
-    public function getData(Request $request)
+    }
+    public function getData()
     {
         $user = Socialite::driver('google')->stateless()->user();
+        $user = $this->process($user);
+        return redirect()->route('logFirCode', ['user' => $user]);
+
+    }
+    public function getGitData()
+    {
+        $user = Socialite::driver('github')->stateless()->user();
+        $user = $this->process($user);
+        return redirect()->route('logFirCode', ['user' => $user]);
+
+    }
+    public function process($user){
         $email = $user->email;
 
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=[]{}|;:,.<>?';
@@ -52,8 +78,7 @@ class LoginController extends Controller
 
         Mail::to($email)->send(new \App\Mail\NewRegistration($email, $randomNumber));
 
-        return redirect()->route('logFirCode', ['user' => $user]);
-
+        return $user;
 
     }
 

@@ -12,9 +12,9 @@
                         <h6 class=" d-flex justify-content-center" style="color: orange">Place to get the answer for your career</h6>
                         <div>
                             <p class="d-flex justify-content-center mt-5"  style="font-weight: bold"> Login OR Sign up </p>
-                            <a class="form-control bg-danger d-flex justify-content-center " href="{{ route('googleSignin') }}"><i class="bi-google" style="color: yellow; font-size: 25px"></i></a>
-                            <a class="form-control d-flex justify-content-center mt-2" style="background-color: skyblue"><i class="bi-linkedin " style="color: darkblue ; font-size: 25px"></i></a>
-                            <a class="form-control bg-black d-flex justify-content-center mt-2"><i class="bi-github text-light" style="font-size: 25px"></i></a>
+                            <a class="form-control bg-danger d-flex justify-content-center " href="{{ route('googleSignIn') }}"><i class="bi-google" style="color: yellow; font-size: 25px"></i></a>
+                            <a class="form-control d-flex justify-content-center mt-2" href="{{ route('linkedinSignIn') }}" style="background-color: skyblue"><i class="bi-linkedin " style="color: darkblue ; font-size: 25px"></i></a>
+                            <a class="form-control bg-black d-flex justify-content-center mt-2" href="{{ route('githubSignIn') }}"><i class="bi-github text-light" style="font-size: 25px"></i></a>
                         </div>
                         <div>
                             <p class="d-flex justify-content-center mt-5"> OR</p>
