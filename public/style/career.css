@@ -513,8 +513,6 @@ a{
     border: none;
 }
 .bodys{
-    margin-top: 150px;
-    position: relative;
     width: 100%;
     padding: 20px;
     height: fit-content;
@@ -843,7 +841,7 @@ a{
 }
 
 .lay{
-    width: 100%;
+    width: 300px;
 
     padding:10px;
     height: fit-content;

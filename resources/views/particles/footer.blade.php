@@ -1,10 +1,10 @@
 <style>
     footer {
         position: relative;
-        top: 100%;
+        bottom: 0;
     }
 </style>
 
-<footer class="h-25 w-100 bg-success text-light d-flex justify-content-center p-2">
-    @Ritesh Koirala @2023 @Northampton Project
+<footer class=" w-100 text-light d-flex justify-content-center p-2" style="height: 70px; background-color: #2d2923">
+    <p class="mt-2">@Ritesh Koirala @2023 @Northampton Project</p>
 </footer>

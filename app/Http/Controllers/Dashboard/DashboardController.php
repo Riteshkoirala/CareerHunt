@@ -13,15 +13,18 @@ class DashboardController extends Controller
         if (Auth::user()) {
             $logUser = UserProfile::where('user_id', Auth::user()->id)->first();
             if ($logUser) {
-                return view('dashboard.dashboard');
+                return view('dashboard.home');
             }
             else{
                 return view('profile.create');
             }
         }
         else{
-            return view('dashboard.dashboard');
+            return view('dashboard.home');
         }
 
+    }
+    public function recommend(){
+        return view('dashboard.recommend');
     }
 }

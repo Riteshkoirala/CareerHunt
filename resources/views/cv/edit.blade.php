@@ -69,7 +69,7 @@
                     <input type="text" class="form-control mx-2 mt-1" name="title" value="{{ $cvData->title }}" placeholder="Nepali, English">
                 </div>
             </div>
-            <div class="d-flex flex-wrap"><div class="flex-row">
+            <div class="d-flex flex-wrap p-4"><div class="flex-row">
                     <h4 class="mt-4">Objective/Summary:</h4>
                     <div class="d-flex flex-wrap">
                         <textarea id="addEdit"  class="ckeditor" name="objective" placeholder="write what u are and what are you searching for.">{!! $cvData->objective !!}</textarea>
@@ -83,7 +83,7 @@
                 </div>
 
             </div>
-            <div class="d-flex flex-wrap"><div class="flex-row">
+            <div class="d-flex flex-wrap p-4"><div class="flex-row">
                     <h4 class="mt-4">Experience:</h4>
                     <div class="d-flex flex-wrap">
                         <textarea id="addEdit"  class="ckeditor" name="experience" placeholder="write what u are and what are you searching for.">{!! $cvData->experience !!}</textarea>
@@ -97,6 +97,7 @@
                 </div>
 
             </div>
+            <div class="p-4">
             <h4 class="mt-4">certification/Training:</h4>
             <div class="d-flex flex-wrap">
                 <textarea id="addEdit" class="ckeditor" name="certification_training" placeholder="write what u are and what are you searching for.">{!! $cvData->certification_training !!}</textarea>
@@ -104,7 +105,8 @@
             <div class="d-flex justify-content-end">
                 <button class="btn btn-success">Save</button>
                 <a href="{{ route('preview.pdf') }}" target="_blank" class="btn btn-primary mx-3">Preview</a>
-            </div>
+            </div></div>
+
         </form>
     </div>
     <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>

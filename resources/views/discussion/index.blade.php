@@ -13,7 +13,7 @@
             Left Column
         </div>
         <div class="center-column me-2" style="width: 70%">
-            <div class="top-row mb-2">
+            <div class="top-row mb-2 text-white" style="background-color: #7ea9e8">
                 <div>
                     <form>
                         <div class="d-flex">
@@ -180,16 +180,20 @@
                                                     <div class="d-flex justify-content-center"
                                                          style="width: 100%; border: 1px solid black; border-radius: 20px"><span
                                                             class="count1">0</span>
+                                                        <form>
                                                         <button class="button1" style="border: none"><i
                                                                 class="bi-hand-thumbs-up-fill text-info"></i>
                                                         </button>
+                                                        </form>
                                                     </div>
                                                     <div class="d-flex justify-content-center"
                                                          style="width: 100%; border: 1px solid black; border-radius: 20px"><span
                                                             class="count2">0</span>
+                                                        <form action="#">
                                                         <button class="button2" style="border: none"><i
                                                                 class="bi-hand-thumbs-down-fill text-danger"></i>
                                                         </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -281,10 +285,19 @@
             let countValue1 = 0;
             let countValue2 = 0;
 
-            $(document).on('click', '.button1', function (e) {
-                countValue1++;
-                $('.count1').text(countValue1);
-            });
+            {{--$(document).on('click', '.button1', function (e) {--}}
+            {{--    $.ajax({--}}
+            {{--       url: '{{ route('') }}',--}}
+            {{--       method:'get',--}}
+            {{--        data: {--}}
+            {{--           reaction: 0--}}
+            {{--        },--}}
+            {{--        dataType: 'json',--}}
+            {{--        success: function (response){--}}
+
+            {{--        }--}}
+            {{--    });--}}
+            {{--});--}}
 
             $(document).on('click', '.button2', function (e) {
                 countValue2++;
@@ -300,6 +313,6 @@
             });
 
 
-
+        });
     </script>
 @endsection

@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[DashboardController::class,'index'])->name('Home');
+Route::get('/recommend',[DashboardController::class,'recommend'])->name('recommend');
 Route::get('/login',[LoginController::class,'index'])->name('loign');
 Route::get('/Signup',[LoginController::class,'Signup'])->name('signup');
 Route::get('/google-Sign-in',[LoginController::class,'signInGoogle'])->name('googleSignIn');

@@ -1,6 +1,6 @@
 @extends('dashboard.dashboard')
 @section('content')
-    <div class="bg-light p-3">
+    <div class="bg-light p-3 h-75">
         <div class="heading">
             <h3>Test Your Skills With Assessment Test</h3>
 

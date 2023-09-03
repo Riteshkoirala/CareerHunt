@@ -25,16 +25,16 @@ class UserProfileStoreRequest extends FormRequest
         return [
             'firstname' => 'required|max:40',
             'lastname' => 'required|max:40',
-            'location' => 'required|regex:/^[a-zA-Z0-9-]+\s*,\s*[a-zA-Z0-9-]+$/i',
-            'contact_number' => 'required|regex:/^[0-9\+]+$/',
-            'skills' => 'required|max:250',
-            'education' => 'required|max:500',
-            'image'=>'max:60000',
-            'cv'=>'max:60000',
-            'college_name'=>'required|max:100',
-            'about'=>'required|max:250',
-            'experience'=>'required|max:250',
-            'linkedin_link'=>'url',
+            'location' => 'nullable|regex:/^[a-zA-Z0-9-]+\s*,\s*[a-zA-Z0-9-]+$/i',
+            'contact_number' => 'nullable|regex:/^[0-9\+]+$/',
+            'skills' => 'nullable|max:250',
+            'education' => 'nullable|max:500',
+            'image'=>'nullable|max:60000',
+            'cv'=>'nullable|max:60000',
+            'college_name'=>'nullable|max:100',
+            'about'=>'nullable|max:250',
+            'experience'=>'nullable|max:250',
+            'linkedin_link'=>'nullable|url',
 
         ];
     }
