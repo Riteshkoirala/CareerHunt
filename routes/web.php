@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Frontend\Comment\CommentController;
 use App\Http\Controllers\Frontend\Post\PostController;
 use App\Http\Controllers\Profile\UserProfileController;
+use App\Http\Controllers\ReactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,20 +42,24 @@ Route::get('login-Auth/{user}',[LoginController::class, 'loginAuthenticate'])->n
 Route::get('logout', [LoginController::class, 'destroy'])
     ->name('logout');
 
-
+Route::get('like',[ReactionController::class, 'postLikeReaction'])->name('likes');
+Route::get('Dis',[ReactionController::class, 'postDisReaction'])->name('Dis');
 
 Route::resource('post', PostController::class);
-Route::resource('assessment', AssessmentController::class);
+Route::resource('Assessment', AssessmentController::class);
 Route::resource('profile', UserProfileController::class);
 Route::resource('cv', CvController::class);
 Route::resource('comment',CommentController::class);
 Route::resource('contact', ContactController::class);
 Route::resource('additional-resource', AdditionalResourceController::class);
 
+Route::post('save-and-exit', [AssessmentController::class,'saveAndExit'])->name('save-and-exit');
+Route::post('save-and-next', [AssessmentController::class,'saveAndNext'])->name('save-and-next');
+
 Route::get('cv-pdf', [CvController::class,'getPDF'])->name('preview.pdf');
-Route::get('easy-mode/od23h2i32b53b45i3b53iu4', [AssessmentController::class,'easy'])->name('easy');
-Route::get('intermediate-mode/094238753837289349hyy2uguyc', [AssessmentController::class,'intermediate'])->name('intermediate');
-Route::get('hard-mode/cniwbncwviewbv9080w890we', [AssessmentController::class,'hard'])->name('hard');
+Route::get('easy-mode/od23h2i32b53b45i3b53iu4/{tag}', [AssessmentController::class,'easy'])->name('easy');
+Route::get('intermediate-mode/094238753837289349hyy2uguyc/{tag}', [AssessmentController::class,'intermediate'])->name('intermediate');
+Route::get('hard-mode/cniwbncwviewbv9080w890we/{tag}', [AssessmentController::class,'hard'])->name('hard');
 
 
 Route::get('post-attachment/{id}', [PostController::class,'attachmentDestroy'])->name('attachment-destroy');

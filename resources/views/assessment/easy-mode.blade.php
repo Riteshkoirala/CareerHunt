@@ -5,7 +5,8 @@
             <h3>PHP Assessment - Easy level</h3>
 
         </div>
-        <form>
+        <form id="myForm" action="{{ route('save-and-exit') }}" method="post" >
+            @csrf
         <div class="ques">
             @foreach($easy as $key=>$easyQuestion)
                 <p class="d-none">{{ $key++ }}</p>
@@ -15,14 +16,47 @@
             @endif
                 <div class="ans">
                     <pre>{{ $easyQuestion->choose }}</pre>
-                    <span>Answer:</span><input class="form-control" placeholder="write answer a,b,c,d">
+{{--                    <input type="hidden" class="form-control" name="questions[]" val placeholder="write answer a,b,c,d">--}}
+                    <span>Answer:</span><input type="text" class="form-control" name="answers[{{ $easyQuestion->id }}]" placeholder="write answer a,b,c,d">
                 </div>
             @endforeach
             <div class="d-flex justify-content-end">
-                <a class="btn btn-danger">Cancel</a>
-                <button class="btn btn-primary mx-2" >Save and Next</button>
+                <input type="hidden" value="{{ $easyQuestion->tag }}" name="tag">
+                <input type="hidden" value="easy" name="mode">
+                <a class="btn btn-primary"  href="{{ route('Assessment.index') }}">cancel</a>
+                <button id="saveAndExitButton" class="btn btn-danger mx-2">Save and Exit</button>
+                <button id="saveAndNextButton" class="btn btn-success mx-2" >Save and Next</button>
             </div>
         </div>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const saveAndExitButton = document.getElementById('saveAndExitButton');
+            const saveAndNextButton = document.getElementById('saveAndNextButton');
+            const form = document.getElementById('myForm');
+
+            saveAndExitButton.addEventListener('click', function () {
+                // Display a confirmation dialog
+                if (window.confirm('Are you sure you want to save and exit?')) {
+                    // Update the form action URL
+                    form.action = "{{ route('save-and-exit') }}";
+                    // Submit the form
+                    form.submit();
+                }
+            });
+
+            saveAndNextButton.addEventListener('click', function () {
+                // Display a confirmation dialog
+                if (window.confirm('Are you sure you want to save and proceed to the next step?')) {
+                    // Update the form action URL
+                    form.action = "{{ route('save-and-next') }}"; // Change to your desired route
+                    // Submit the form
+                    form.submit();
+                }
+            });
+        });
+    </script>
+
+
 @endsection

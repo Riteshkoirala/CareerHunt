@@ -12,10 +12,8 @@ class AssessmentResult extends Model
 
     protected $fillable = [
       'user_id',
-      'assessment_id',
-      'easy_mode',
-      'intermediate_mode',
-      'hard_mode',
+      'assessment_tag',
+      'mode',
       'mark',
       'updated_at',
     ];

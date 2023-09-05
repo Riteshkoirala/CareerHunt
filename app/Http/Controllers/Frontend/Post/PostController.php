@@ -20,6 +20,7 @@ class PostController extends Controller
     public function index()
     {
       $posts = Post::latest()->filter(request(['search']))->get();
+
       return view('discussion.index', compact('posts'));
     }
 

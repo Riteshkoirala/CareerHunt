@@ -29,7 +29,7 @@
                     <a href="{{ route('post.index') }}">&nbsp;&nbsp;Discussion&nbsp;&nbsp;</a>
                 </li>
                 <li class="deg">
-                    <a href="{{ route('assessment.index') }}">&nbsp;&nbsp;Assessment&nbsp;&nbsp;</a>
+                    <a href="{{ route('Assessment.index') }}">&nbsp;&nbsp;Assessment&nbsp;&nbsp;</a>
                 </li>
                 <li class="deg">
                     <a href="{{ route('cv.index') }}">&nbsp;&nbsp;CV&nbsp;&nbsp;</a>

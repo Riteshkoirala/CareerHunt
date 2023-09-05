@@ -45,7 +45,7 @@ class UserProfileController extends Controller
     public function store(UserProfileStoreRequest $request, profileCreation $profileCreation)
     {
         $profileCreation->profileStore($request);
-        return redirect()->route('/');
+        return redirect()->route('Home');
     }
 
     /**

@@ -15,11 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('assessment_id');
-            $table->foreign('assessment_id')->references('id')->on('assessments');
-            $table->string('easy_mode')->default('0');
-            $table->string('intermediate_mode')->default('0');
-            $table->string('hard_mode')->default('0');
+            $table->string('assessment_tag');
+            $table->string('mode');
             $table->string('mark');
             $table->timestamps();
             $table->softDeletes();

@@ -842,7 +842,6 @@ a{
 
 .lay{
     width: 300px;
-
     padding:10px;
     height: fit-content;
     background-color: white;
@@ -950,3 +949,10 @@ a{
 .delete:hover {
     background-color: lightgray;
 }
+.disabled-link {
+    color: #999; /* Change the color to a visually muted color */
+    text-decoration: none; /* Remove underline */
+    cursor: not-allowed; /* Change cursor to not-allowed */
+    pointer-events: none; /* Prevent click events */
+}
+

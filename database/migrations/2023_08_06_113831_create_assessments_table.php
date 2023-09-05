@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('assessments', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
-            $table->string('coding')->nullable();
-            $table->string('choose');
+            $table->longText('question');
+            $table->string('tag');
+            $table->longText('coding')->nullable();
+            $table->longText('choose');
             $table->string('answer');
             $table->string('label');
             $table->timestamps();

@@ -130,16 +130,17 @@
                                     <div class="d-flex justify-content-center" style="width: 100%">
                                         <div class="d-flex justify-content-center post"
                                              style="width: 100%; border: 1px solid black; border-radius: 20px" data-post-id="{{ $post->id }}"><span
-                                                class="count1"></span>
-                                            <button class="button1" style="border: none"><i
-                                                    class="bi-hand-thumbs-up-fill text-info"></i>Like
+                                                class="count12">0</span>
+                                            <input type="hidden" value="{{ $post->id }}" class="getPost">
+                                            <button class="button12" style="border: none"><i
+                                                    class="bi-hand-thumbs-up"></i>Like
                                             </button>
                                         </div>
                                         <div class="d-flex justify-content-center post"
                                              style="width: 100%; border: 1px solid black; border-radius: 20px" data-post-id="{{ $post->id }}"><span
-                                                class="count2">0</span>
-                                            <button class="button2" style="border: none"><i
-                                                    class="bi-hand-thumbs-down-fill text-danger"></i>Unlike
+                                                class="count21">0</span>
+                                            <button class="button223" style="border: none"><i
+                                                    class="bi-hand-thumbs-down"></i>Unlike
                                             </button>
                                         </div>
                                     </div>
@@ -176,26 +177,26 @@
                                                 <div class="mx-3">
                                                     <p style="font-size: 12px">{{ $comment->message }}</p>
                                                 </div>
-                                                <div class="d-flex justify-content-end" style="width: 20%">
-                                                    <div class="d-flex justify-content-center"
-                                                         style="width: 100%; border: 1px solid black; border-radius: 20px"><span
-                                                            class="count1">0</span>
-                                                        <form>
-                                                        <button class="button1" style="border: none"><i
-                                                                class="bi-hand-thumbs-up-fill text-info"></i>
-                                                        </button>
-                                                        </form>
-                                                    </div>
-                                                    <div class="d-flex justify-content-center"
-                                                         style="width: 100%; border: 1px solid black; border-radius: 20px"><span
-                                                            class="count2">0</span>
-                                                        <form action="#">
-                                                        <button class="button2" style="border: none"><i
-                                                                class="bi-hand-thumbs-down-fill text-danger"></i>
-                                                        </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
+{{--                                                <div class="d-flex justify-content-end" style="width: 20%">--}}
+{{--                                                    <div class="d-flex justify-content-center"--}}
+{{--                                                         style="width: 100%; border: 1px solid black; border-radius: 20px"><span--}}
+{{--                                                            class="count1">0</span>--}}
+{{--                                                        <form>--}}
+{{--                                                        <button class="button1" style="border: none" data-item-id="{{ $post->id }}"><i--}}
+{{--                                                                class="bi-hand-thumbs-up-fill text-info"></i>--}}
+{{--                                                        </button>--}}
+{{--                                                        </form>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="d-flex justify-content-center"--}}
+{{--                                                         style="width: 100%; border: 1px solid black; border-radius: 20px"><span--}}
+{{--                                                            class="count2">0</span>--}}
+{{--                                                        <form action="#">--}}
+{{--                                                        <button class="button2" style="border: none"><i--}}
+{{--                                                                class="bi-hand-thumbs-down-fill text-danger"></i>--}}
+{{--                                                        </button>--}}
+{{--                                                        </form>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
                                             </div>
                                             </div>
                                             @break
@@ -282,8 +283,98 @@
                 $(this).prev('.full-message').prev('.see-more').show();
             });
 
-            let countValue1 = 0;
-            let countValue2 = 0;
+            $(".button12").click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                var itemId = this.closest('.post').getAttribute('data-post-id');
+                // Send an AJAX request to update the database
+                $.ajax({
+                    url: '{{ route('likes') }}', // Replace with the actual URL of your backend API
+                    method: 'get', // Use POST or GET depending on your backend API
+                    data: { itemId: itemId }, // Send the item ID to the server
+                    dataType: 'json',
+                    success: function(response) {
+                        // Update the count and icon color if the request was successful
+                        if (response.success) {
+                            var post = button.closest('.post');
+                            var countElement = post.find(".count12");
+                            var countElement1 = post.find(".count21");
+                            var iconElement = button.find("i");
+
+                            countElement.empty().text(response.like);
+                            countElement1.empty().text(response.DisLike);
+                            countElement.text(response.like);
+                            countElement1.text(response.DisLike)
+
+                            // Change icon color (example: to green)
+                            iconElement.removeClass("bi-hand-thumbs-up");
+                            iconElement.addClass("bi-hand-thumbs-up-fill text-info");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+// Handle errors here
+                        console.log(xhr.responseText); // Log the full response text
+                        console.log(status); // Log the HTTP status code (e.g., 500)
+                        console.log(error); // Log the error message
+
+                        // You can also parse the JSON response if applicable
+                        try {
+                            var errorResponse = JSON.parse(xhr.responseText);
+                            console.log(errorResponse); // Log the parsed JSON response
+                        } catch (e) {
+                            console.log("Failed to parse error response as JSON");
+                        }
+                    }
+                    });
+            });
+
+            $(".button223").click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                var itemId = this.closest('.post').getAttribute('data-post-id');
+                // Send an AJAX request to update the database
+                $.ajax({
+                    url: '{{ route('Dis') }}', // Replace with the actual URL of your backend API
+                    method: 'get', // Use POST or GET depending on your backend API
+                    data: { itemId: itemId }, // Send the item ID to the server
+                    dataType: 'json',
+                    success: function(response) {
+                        // Update the count and icon color if the request was successful
+                        if (response.success) {
+                            var post = button.closest('.post');
+
+                            var countElement = post.find(".count12");
+                            var countElement1 = post.find(".count21");
+                            var iconElement = button.find("i");
+
+                            countElement.empty().text(response.like);
+                            countElement1.empty().text(response.DisLike);
+                            countElement.text(response.like);
+                            countElement1.text(response.DisLike)
+
+                            // Change icon color (example: to green)
+                            iconElement.removeClass("bi-hand-thumbs-down");
+                            iconElement.addClass("bi-hand-thumbs-down-fill text-danger");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+// Handle errors here
+                        console.log(xhr.responseText); // Log the full response text
+                        console.log(status); // Log the HTTP status code (e.g., 500)
+                        console.log(error); // Log the error message
+
+                        // You can also parse the JSON response if applicable
+                        try {
+                            var errorResponse = JSON.parse(xhr.responseText);
+                            console.log(errorResponse); // Log the parsed JSON response
+                        } catch (e) {
+                            console.log("Failed to parse error response as JSON");
+                        }
+                    }
+                });
+            });
+            // let countValue1 = 0;
+            // let countValue2 = 0;
 
             {{--$(document).on('click', '.button1', function (e) {--}}
             {{--    $.ajax({--}}
@@ -299,10 +390,10 @@
             {{--    });--}}
             {{--});--}}
 
-            $(document).on('click', '.button2', function (e) {
-                countValue2++;
-                $('.count2').text(countValue2);
-            });
+            // $(document).on('click', '.button2', function (e) {
+            //     countValue2++;
+            //     $('.count2').text(countValue2);
+            // });
 
             $('.ckeditor').ckeditor();
             $('#message').ckeditor({
