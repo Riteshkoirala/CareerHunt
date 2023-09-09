@@ -2,15 +2,17 @@
 @section('content')
 
     <div class="bg-light p-3 h-75">
-        <div class="heading">
+        <div class="btn btn-primary" style="width: fit-content">+New Assessment</div>
+        <div class="heading" style="margin-top: -30px">
             <h3>Test Your Skills With Assessment Test</h3>
 
         </div>
+        <hr>
         <div class=" asses p-3">
             @foreach($assessments as $assessment)
             <div class="mx-3">
                 <div class=" lay p-3">
-                    <div>
+                    <diassessment_resultsv>
                         <div>
                             <img src="{{ asset('images/img_1.png') }}" width="200px" height="100px">
                         </div>
@@ -53,7 +55,7 @@
                                 <p style="margin-top: -10px">Previous Mark: 0/100</p>
                             @endif
 
-                        </div>
+                        </diassessment_resultsv>
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('easy', $assessment->tag) }}" class="btn btn-success">Take Test</a>
                             <a class="btn btn-info">Reset</a>

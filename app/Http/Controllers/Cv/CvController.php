@@ -8,6 +8,7 @@ use App\Http\Requests\StoreCvRequest;
 use App\Http\Requests\UpdateCvRequest;
 use App\Http\Services\ImageSaver;
 use App\Models\Cv\Cv;
+use Illuminate\Support\Facades\Auth;
 
 class CvController extends Controller
 {
@@ -16,7 +17,7 @@ class CvController extends Controller
      */
     public function index()
     {
-        $cvData = Cv::where('user_id',1)->first();
+        $cvData = Cv::where('user_id',Auth::user()->id)->first();
         if ($cvData){
             return view('cv.edit',compact('cvData'));
         }
@@ -37,11 +38,11 @@ class CvController extends Controller
     public function store(StoreCvRequest $request, ImageSaver $imageSaver)
     {
         $dataValidate = $request->validated();
-        if($request->has('image')) {
+        if($request->has('image') && $request->image != null) {
             $imageName = $imageSaver->imageStore($dataValidate, 'cv');
             $dataValidate['image_name'] = $imageName;
         }
-        $cv = CV::where('user_id', 1)->first();
+        $cv = CV::where('user_id', Auth::user()->id)->first();
         if ($cv) {
             $cv->update($dataValidate);
         } else {
@@ -85,12 +86,17 @@ class CvController extends Controller
 
     public function getPDF()
     {
-//        $pdf = App::make('dompdf.wrapper');
-//        $pdf->loadView('cv.cvpdf');
-//
-//        return $pdf->stream();
-        $cvData = Cv::where('user_id',1)->first();
+        $cvData = Cv::where('user_id',Auth::user()->id)->first();
         return view('cv.cvpdf',compact('cvData'));
+    }
+
+    public function photoUpdate($id){
+        $cvData = Cv::where('user_id',Auth::user()->id)->first();
+        $cvData->update([
+            'image_name'=>null,
+            'image_path'=>null,
+        ]);
+        return back();
     }
 
 }

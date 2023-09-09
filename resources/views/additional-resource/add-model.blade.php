@@ -1,10 +1,4 @@
-@if ($errors->has('resource_title') || $errors->has('resource-url') || $errors->has('resource-image'))
-    <script>
-        $(document).ready(function () {
-            $('#contactModel').modal('show');
-        });
-    </script>
-@endif
+
 <div class="modal fade" id="resoModel" tabindex="-1" aria-labelledby="resoModelLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Increase the width by adding 'modal-xl' class -->
         <div class="modal-content">

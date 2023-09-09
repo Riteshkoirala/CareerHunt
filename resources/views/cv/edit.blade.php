@@ -20,9 +20,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end" style="margin-top: -140px">
-                    <img class="me-4" src="{{ asset('storage/cv/'.$cvData->image_name) }}" alt="cv image" height="100px" width="100px">
-                </div>
+                @if($cvData->image_name != null)
+                    <div class="d-flex justify-content-end" style="margin-top: -140px">
+                        <img class="me-4" src="{{ asset('storage/cv/'.$cvData->image_name) }}" alt="cv image" height="100px" width="100px">
+                        <a href="{{ route('phUp',$cvData->id) }}" onclick="return confirm('Are you sure u want to delete this image?')"><i class="bi bi-trash text-danger"></i></a>
+                    </div>
+                @endif
+
             </div>
             <div class="personal-details-container border rounded p-4 mt-2">
                 <h4 class="mb-3">Personal Details:</h4>

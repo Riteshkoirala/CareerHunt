@@ -51,6 +51,7 @@ Route::resource('profile', UserProfileController::class);
 Route::resource('cv', CvController::class);
 Route::resource('comment',CommentController::class);
 Route::resource('contact', ContactController::class);
+Route::get('contacts/update/{id}', [ContactController::class,'update'])->name('contact.up');
 Route::resource('additional-resource', AdditionalResourceController::class);
 
 Route::post('save-and-exit', [AssessmentController::class,'saveAndExit'])->name('save-and-exit');
@@ -63,6 +64,6 @@ Route::get('hard-mode/cniwbncwviewbv9080w890we/{tag}', [AssessmentController::cl
 
 
 Route::get('post-attachment/{id}', [PostController::class,'attachmentDestroy'])->name('attachment-destroy');
-
+Route::get('photo/update/{id}',[CvController::class,'photoUpdate'])->name('phUp');
 
 

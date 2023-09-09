@@ -34,8 +34,11 @@
                 <li class="deg">
                     <a href="{{ route('cv.index') }}">&nbsp;&nbsp;CV&nbsp;&nbsp;</a>
                 </li>
-                <li class="deg">
-                    <a data-bs-toggle="modal" data-bs-target="#contactModel" data-bs-backdrop="static">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
+{{--                <li class="deg">--}}
+{{--                    <a data-bs-toggle="modal" data-bs-target="#contactModel" data-bs-backdrop="static">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>--}}
+{{--                </li>--}}
+                <li>
+                    <a href="{{ route('contact.index') }}">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
                 </li>
             </ul>
         </div>

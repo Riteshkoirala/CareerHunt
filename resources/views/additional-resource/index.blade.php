@@ -1,5 +1,23 @@
 @extends('dashboard.dashboard')
 @section('content')
+    @if ($errors->has('title') || $errors->has('url') || $errors->has('image'))
+        @if (old('addRes'))
+            <script>
+                var ll = '#editResoModel-' +{{ old('addRes') }}
+                    console.log(ll);
+                $(document).ready(function () {
+                    $(ll).modal('show');
+                });
+            </script>
+        @else
+    <script>
+        $(document).ready(function () {
+            $('#resoModel').modal('show');
+        });
+    </script>
+        @endif
+    @endif
+
     @include('additional-resource.add-model')
     <div class="d-flex">
         <div class="listing">
