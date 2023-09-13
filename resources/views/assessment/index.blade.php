@@ -1,9 +1,9 @@
 @extends('dashboard.dashboard')
 @section('content')
 
-    <div class="bg-light p-3 h-75">
-        <div class="btn btn-primary" style="width: fit-content">+New Assessment</div>
-        <div class="heading" style="margin-top: -30px">
+    <div class="bg-light p-3 mb-5">
+{{--        <div class="btn btn-primary" style="width: fit-content">+New Assessment</div>--}}
+        <div class="heading" style="">
             <h3>Test Your Skills With Assessment Test</h3>
 
         </div>
@@ -12,7 +12,7 @@
             @foreach($assessments as $assessment)
             <div class="mx-3">
                 <div class=" lay p-3">
-                    <diassessment_resultsv>
+                    <div>
                         <div>
                             <img src="{{ asset('images/img_1.png') }}" width="200px" height="100px">
                         </div>
@@ -55,7 +55,7 @@
                                 <p style="margin-top: -10px">Previous Mark: 0/100</p>
                             @endif
 
-                        </diassessment_resultsv>
+                        </div>
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('easy', $assessment->tag) }}" class="btn btn-success">Take Test</a>
                             <a class="btn btn-info">Reset</a>

@@ -27,7 +27,7 @@ class UserProfileStoreRequest extends FormRequest
             'lastname' => 'required|max:40',
             'location' => 'nullable|regex:/^[a-zA-Z0-9-]+\s*,\s*[a-zA-Z0-9-]+$/i',
             'contact_number' => 'nullable|regex:/^[0-9\+]+$/',
-            'skills' => 'nullable|max:250',
+            'skills' => 'required|max:250',
             'education' => 'nullable|max:500',
             'image'=>'nullable|max:60000',
             'cv'=>'nullable|max:60000',

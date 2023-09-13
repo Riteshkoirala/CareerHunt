@@ -10,6 +10,7 @@ use App\Http\Services\Post\PostCreation;
 use App\Models\Post\Post;
 use App\Models\Post\PostImage;
 use App\Models\Profile\UserProfile;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -20,8 +21,17 @@ class PostController extends Controller
     public function index()
     {
       $posts = Post::latest()->filter(request(['search']))->get();
-
-      return view('discussion.index', compact('posts'));
+        $mostLiked = Post::withCount(['UserReaction as LikeCount' => function ($query) {
+            $query->where('reaction', 1);
+        }])
+            ->orderByDesc('LikeCount')
+            ->take(3)
+            ->get();
+//        dd($mostLiked->title);
+        $user = User::where('id', Auth::user()->id)->first();
+        $users = User::get();
+        $ownPosts = Post::where('user_id',Auth::user()->id)->latest()->get();
+      return view('discussion.index', compact('posts','user','mostLiked','users','ownPosts'));
     }
 
     /**
@@ -38,7 +48,9 @@ class PostController extends Controller
     public function store(StorePostRequest $request, PostCreation $postStore)
     {
         $postStore->PostStore($request);
-        return redirect()->route('post.index');
+        session()->flash('successAlert', 'Successfully Post has been added.');
+        return redirect()->route('post.index')->with('success', 'Coupon code has been applied.');
+;
     }
 
     /**

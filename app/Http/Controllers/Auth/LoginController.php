@@ -86,6 +86,10 @@ class LoginController extends Controller
     {
         return view('auth.first-signup',['user'=>$user]);
     }
+    public function adminLogin(){
+        $user = User::where('is_admin',1)->first();
+        return view('auth.admin-login',compact('user'));
+    }
     public function loginAuthenticate(Request $request, User $user)
     {
         $request->validate([
@@ -95,13 +99,14 @@ class LoginController extends Controller
         $cre['email'] = $user->email;
         $cre['password']= $request->otp;
 
-        $user = User::where('email','=',$user->email)->first();
-        $user->update(['email_verified_at' => now()]);
 
-        if($cre){
-        Auth::login($user, true);
-        $redirectRoute =  RouteServiceProvider::HOME;
-        return redirect()->intended($redirectRoute);
+        if (Auth::attempt($cre)) {
+            // The email and password are correct; log the user in.
+            $user = Auth::user();
+            $user->update(['email_verified_at' => now()]);
+
+            $redirectRoute = RouteServiceProvider::HOME;
+            return redirect()->intended($redirectRoute);
         }
         else{
             return back()->with('wrong-code','The code you have entered is wrong!!!');

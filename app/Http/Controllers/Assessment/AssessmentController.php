@@ -19,12 +19,10 @@ class AssessmentController extends Controller
             ->groupBy('tag')
             ->get();
         $resultCheck = AssessmentResult::where('user_id',Auth::user()->id)->first();
-
         $trash = AssessmentResult::onlyTrashed()->where('user_id',Auth::user()->id)->latest()->first();
-
         return view('assessment.index',compact('assessments','resultCheck','trash'));
-
     }
+
     public function easy($tag)
     {
         $easy = Assessment::where('label', 'easy')->where('tag',$tag)->inRandomOrder()->limit(5)->get();
@@ -71,6 +69,7 @@ class AssessmentController extends Controller
      */
     public function create()
     {
+//        return view('assessment.create');
     }
 
     /**

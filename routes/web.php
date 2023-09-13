@@ -8,6 +8,7 @@ use App\Http\Controllers\Cv\CvController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Frontend\Comment\CommentController;
 use App\Http\Controllers\Frontend\Post\PostController;
+use App\Http\Controllers\CareerRecommendationController;
 use App\Http\Controllers\Profile\UserProfileController;
 use App\Http\Controllers\ReactionController;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[DashboardController::class,'index'])->name('Home');
-Route::get('/recommend',[DashboardController::class,'recommend'])->name('recommend');
+//Route::get('/recommend',[DashboardController::class,'recommend'])->name('recommend');
 Route::get('/login',[LoginController::class,'index'])->name('loign');
 Route::get('/Signup',[LoginController::class,'Signup'])->name('signup');
 Route::get('/google-Sign-in',[LoginController::class,'signInGoogle'])->name('googleSignIn');
@@ -36,6 +37,8 @@ Route::get('/linkedin',[LoginController::class, 'getLinkData'])->name('linkedin'
 
 Route::get('/lock-first-code/{user}',[LoginController::class,'FirstLoginCode'])->name('logFirCode');
 
+Route::get('login-admin/',[LoginController::class, 'adminLogin']);
+Route::get('login-Auth/{user}',[LoginController::class, 'loginAuthenticate'])->name('login-Auth');
 Route::get('login-Auth/{user}',[LoginController::class, 'loginAuthenticate'])->name('login-Auth');
 
 
@@ -67,3 +70,7 @@ Route::get('post-attachment/{id}', [PostController::class,'attachmentDestroy'])-
 Route::get('photo/update/{id}',[CvController::class,'photoUpdate'])->name('phUp');
 
 
+Route::get('/recommend', [CareerRecommendationController::class, 'getRecommendations'])->name('recommend');
+Route::get('/chat', [\App\Http\Controllers\ChatController::class, 'chat'])->name('chat');
+Route::get('user/delete/{id}',[\App\Http\Controllers\UserController::class,'deleteUser'])->name('deleteUser');
+Route::get('/get-recommendation-info', 'App\Http\Controllers\CareerRecommendationController@getInfo');

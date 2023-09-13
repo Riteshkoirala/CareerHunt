@@ -21,10 +21,12 @@
     @include('additional-resource.add-model')
     <div class="d-flex">
         <div class="listing">
+            @if(Auth::user()->is_admin == 1)
             <div class="p-3">
                 <a data-bs-toggle="modal" data-bs-target="#resoModel" data-bs-backdrop="static" class="btn btn-primary">Add
                     new Resource</a>
             </div>
+            @endif
             <hr>
             <div class="p-3">
                 <h6>Learning Platform</h6>

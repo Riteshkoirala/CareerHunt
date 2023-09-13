@@ -8,12 +8,12 @@
                 @csrf
                 <div class="d-flex mb-3">
                     <div class="d-flex flex-wrap">
-                <label for="firstname">Firstname: </label>
+                <label for="firstname">Firstname:* </label>
                 <input type="text" class="form-control" name="firstname" placeholder="john" value="{{ old('firstname')  }}">
                 @error('firstname') <span class="text-danger">{{ $message }} </span> @enderror
                     </div>
                     <div class="d-flex flex-wrap mx-2">
-                    <label for="lastname">Lastname: </label>
+                    <label for="lastname">Lastname:* </label>
                 <input type="text" class="form-control" name="lastname" placeholder="doe" value="{{ old('lastname') }}">
                 @error('lastname') <span class="text-danger">{{ $message }} </span> @enderror
                     </div>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="d-flex mb-3" style="margin-left:-10px">
                     <div class="d-flex flex-wrap mx-2">
-                    <label for="skill">Skills that you have: </label>
+                    <label for="skill">Skills that you have:* </label>
                 <span style="font-size: 10px" class="mt-1">Note: separate your skills by comma (,)</span>
                         <input type="text" class="form-control" name="skills" placeholder="java, PHP" value="{{ old('skills') }}">
                 @error('skills') <span class="text-danger">{{ $message }} </span> @enderror

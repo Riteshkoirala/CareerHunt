@@ -13,18 +13,17 @@
 
     <div class="sttext navbar position-relative w-100 mt-5">
         <div class="w-100 text-dark">
-            <ul class="d-flex justify-content-between list-unstyled">
+            <ul class="d-flex justify-content-evenly list-unstyled">
                 <li class="deg">
                     <a href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
                 </li>
-                {{--            @if(Auth::user() == true)--}}
+                @if(Auth::user())
                 <li class="deg">
                     <a href="/recommend">&nbsp;&nbsp;Recommendation&nbsp;&nbsp;</a>
                 </li>
                 <li class="deg">
                     <a href="{{ route('additional-resource.index') }}">&nbsp;&nbsp;Learn-Grow&nbsp;&nbsp;</a>
                 </li>
-                {{--            @endif--}}
                 <li class="deg">
                     <a href="{{ route('post.index') }}">&nbsp;&nbsp;Discussion&nbsp;&nbsp;</a>
                 </li>
@@ -34,12 +33,17 @@
                 <li class="deg">
                     <a href="{{ route('cv.index') }}">&nbsp;&nbsp;CV&nbsp;&nbsp;</a>
                 </li>
-{{--                <li class="deg">--}}
-{{--                    <a data-bs-toggle="modal" data-bs-target="#contactModel" data-bs-backdrop="static">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>--}}
-{{--                </li>--}}
-                <li>
-                    <a href="{{ route('contact.index') }}">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
-                </li>
+                @endif
+                @if(Auth::check() && Auth::user()->is_admin == 1)                    <li>
+                        <a href="{{ route('contact.index') }}">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
+                    </li>
+                @else
+                    <li class="deg">
+                        <a data-bs-toggle="modal" data-bs-target="#contactModel" data-bs-backdrop="static">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
+                    </li>
+                @endif
+
+
             </ul>
         </div>
     </div>

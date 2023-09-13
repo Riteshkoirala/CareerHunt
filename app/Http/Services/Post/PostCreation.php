@@ -4,6 +4,7 @@ namespace App\Http\Services\Post;
 
 use App\Models\Post\Post;
 use App\Models\Post\PostImage;
+use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\Type\VoidType;
 
 class PostCreation
@@ -17,7 +18,7 @@ class PostCreation
         $createPost = Post::create([
             'title'=>$postData['title'],
             'message'=>$postData['message'],
-            'user_id'=>1,
+            'user_id'=>Auth::user()->id,
         ]);
 
         if($request->files != null)

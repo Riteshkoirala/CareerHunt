@@ -78,7 +78,10 @@ body {
     display: flex;
 }
 
-.left-column,
+.left-column{
+    width: 25%;
+    background-color: #f0f0f0;
+}
 .right-column {
     width: 25%;
     background-color: #f0f0f0;
@@ -836,7 +839,7 @@ a{
     margin: 10px;
     height: fit-content;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     width: 100%;
 }
 

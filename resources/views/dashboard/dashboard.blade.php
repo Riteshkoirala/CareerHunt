@@ -10,6 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="{{ asset('ckeditor/adapters/jquery.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('croppie/croppie.css') }}" />
+    <script type="text/javascript" src="{{ asset('assets/snackbar/snackbar.min.js') }}"></script>
+    <link href="{{ asset('assets/snackbar/snackbar.min.css') }}" rel="stylesheet">
 
     <!-- Modal -->
     <link rel="stylesheet" href=
@@ -26,6 +28,7 @@
     @yield('content')
     </div>
     @yield('script')
+    @include('alerts.snackbar')
 
 <div>
     @include('particles.footer')

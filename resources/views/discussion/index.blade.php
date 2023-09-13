@@ -9,9 +9,44 @@
     @endif
 
     <div class="container mb-5" style="margin-top: 40px; width: 100%; padding-left: 0; padding-right: 0;">
-        <div class="left-column m-2 p-2 position-sticky fixed-top" style="height: 200px">
-            Left Column
+        <div class="left-column d-flex flex-wrap m-2 p-2 position-sticky fixed-top" style="height: fit-content">
+            @if(Auth::user()->is_admin == 1)
+            <div class="mb-3 p-2 w-100" style=" border: 1px solid black">
+                <h5>Users</h5>
+            @foreach($users as $userSeen)
+                <div class="d-flex justify-content-between rounded text-light" style="background-color: #0d6efd">
+                <div class="p-1  rounded d-flex">
+            @if($userSeen->userProfile->image_name != null)
+                <img src="{{ asset('storage/user/'.$userSeen->userProfile->id.'/'.$userSeen->userProfile->image_name) }}" height="30" width="30" style="border-radius: 25px; border:1px solid purple;">
+            @else
+                <i class="bi-person-circle text-info" style="font-size: 20px"></i>
+            @endif
+                    <p class="mx-2 mt-1">{{ $userSeen->userProfile->firstname." ". $userSeen->userProfile->lastname}}</p>
+                </div>
+                <div class="mt-3"><a href="{{ route('deleteUser',$userSeen->id) }}" onclick="return confirm('Are you sure you want to delete this user?')"><i class="bi bi-trash text-danger m-4" ></i></a>
+                </div>
+                </div>
+            @endforeach
+            </div>
+            @endif
+            <div class="p-2" style="border: 1px solid black">
+                <h5>LatestPost</h5>
+                <div class="">
+                    @foreach($ownPosts as $own)
+                        <div class="rounded m-2 p-2" style="background-color: lightgrey;">
+                            @if($own->user->userProfile->image_name != null)
+                                <img src="{{ asset('storage/user/'.$own->user->userProfile->id.'/'.$own->user->userProfile->image_name) }}" height="30" width="30" style="border-radius: 25px; border:1px solid purple;"><span class="mx-2" style="font-weight: bold; font-size: 13px;">{{ $own->user->userProfile->firstname." ".$own->user->userProfile->lastname }}</span>
+                            @else
+                                <i class="bi-person-circle text-info" style="font-size: 25px"></i><span class="mx-2" style="font-weight: bold; font-size: 13px;">{{ $own->user->userProfile->firstname." ".$own->user->userProfile->lastname }}</span>
+                            @endif
+                            <h6>{{ $own->title }}</h6>
+                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($own->message), 250, '...') }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
+
         <div class="center-column me-2" style="width: 70%">
             <div class="top-row mb-2 text-white" style="background-color: #7ea9e8">
                 <div>
@@ -42,18 +77,25 @@
                                  style="box-shadow: 2px 2px 10px 5px lightgrey; border-radius: 20px; width: 600px">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex">
-                                        <i class="bi-person-circle text-info" style="font-size: 40px"></i>
-                                        <span class="mx-2"
-                                              style="font-weight: bold; font-size: 15px;">Ritesh Koirala</span>
-                                        <em style="margin-top:20px; margin-left: -110px; font-size: 10px;">{{ $post->created_at->diffForHumans() }}
-                                            <i class="bi-globe text-danger"></i></em></div>
-                                                                    @if(Auth::user())
-                                                                        @if(Auth::user()->id == $post->user_id)
-                                    <div class="d-flex"><a class="eddd"
+                                        @if($post->user->userProfile->image_name != null)
+                                            <img src="{{ asset('storage/user/'.$post->user->userProfile->id.'/'.$post->user->userProfile->image_name) }}" height="50" width="50" style="border-radius: 25px; border:1px solid purple;">
+                                        @else
+                                            <i class="bi-person-circle text-info" style="font-size: 40px"></i>
+                                        @endif
+                                        <div class="">
+                                        <p class="mx-2"
+                                              style="font-weight: bold; font-size: 15px;">{{ $post->user->userProfile->firstname." ".$post->user->userProfile->lastname }}</p>
+                                        <p  class="mx-1" style="margin-top: -15px"><em style="font-size: 10px;">{{ $post->created_at->diffForHumans() }}
+                                            <i class="bi-globe text-danger"></i></em></p></div></div>
+                                        @if(Auth::user()->id == $post->user_id || Auth::user()->is_admin =1)
+                                    <div class="d-flex">
+                                        @if(Auth::user()->id == $post->user_id)
+                                            <a class="eddd"
                                                            data-bs-toggle="modal"
                                                            data-bs-target="#exampleE-{{ $post->id }}"
                                                            style="cursor: pointer"><i
-                                                class="bi-pencil-square text-info"></i></a></span>
+                                                class="bi-pencil-square text-info"></i></a>
+                                        @endif
                                         @include('discussion.editPost-model')
                                         <form action="{{ route('post.destroy', $post) }}" method="POST"
                                               onsubmit="return confirm('Are you sure you want to delete???')">
@@ -64,7 +106,6 @@
                                         </form>
                                     </div>
                                                                         @endif
-                                                                    @endif
 
                                     {{--                            <i class="bi-trash text-danger"></i></a></span>--}}
 
@@ -126,22 +167,43 @@
                                             </div>
                                     </a>
                                 </div>
+                                @php
+                                    $LikeCount = $post->UserReaction()->wherePivot('reaction', 1)->count();
+                                    $DisLikeCount = $post->UserReaction()->wherePivot('reaction', 0)->count();
+                                    @endphp
                                 <div class="mt-4">
                                     <div class="d-flex justify-content-center" style="width: 100%">
                                         <div class="d-flex justify-content-center post"
-                                             style="width: 100%; border: 1px solid black; border-radius: 20px" data-post-id="{{ $post->id }}"><span
-                                                class="count12">0</span>
+                                             style="width: 100%; border: 1px solid black; border-radius: 20px">
                                             <input type="hidden" value="{{ $post->id }}" class="getPost">
-                                            <button class="button12" style="border: none"><i
-                                                    class="bi-hand-thumbs-up"></i>Like
+                                            @if($user->PostReaction()->wherePivot('reaction', 1)->wherePivot('post_id', $post->id)->count()>=1)
+                                            <button class="buttonLik-{{ $post->id }}" style="border: none" disabled>
+                                                    <i
+                                                        class="ic-{{ $post->id }} bi-hand-thumbs-up-fill text-info"></i>{{$LikeCount}} Like</button>
+
+                                            @else
+                                                    <button class="buttonLik-{{ $post->id }}" style="border: none">
+                                                        <i
+                                                        class="ic-{{ $post->id }} bi-hand-thumbs-up"></i>
+                                                    {{$LikeCount}} Like
                                             </button>
+                                            @endif
                                         </div>
                                         <div class="d-flex justify-content-center post"
-                                             style="width: 100%; border: 1px solid black; border-radius: 20px" data-post-id="{{ $post->id }}"><span
-                                                class="count21">0</span>
-                                            <button class="button223" style="border: none"><i
-                                                    class="bi-hand-thumbs-down"></i>Unlike
+                                             style="width: 100%; border: 1px solid black; border-radius: 20px">
+                                            @if($user->PostReaction()->wherePivot('reaction', 0)->wherePivot('post_id', $post->id)->count() >=1)
+                                            <button class="buttonDis-{{$post->id}}" style="border: none" disabled>
+                                                    <i
+                                                        class="icn-{{ $post->id }} bi-hand-thumbs-down-fill text-danger"></i>
+
+                                               {{ $DisLikeCount }} Dislike
                                             </button>
+                                            @else
+                                                <button class="buttonDis-{{$post->id}}" style="border: none">
+                                                    <i
+                                                        class="icn-{{ $post->id }} bi-hand-thumbs-down"></i>
+                                                    {{ $DisLikeCount }} Dislike
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -157,12 +219,17 @@
                                             @endphp
                                             <div style="background-color: #eeebeb;">
                                             <div class="d-flex p-1" >
-                                                <i class="bi-person-circle text-info" style="font-size: 20px"></i>
-                                                <span class="mx-2" style="font-weight: bold; font-size: 13px;">Ritesh Koirala</span>
-                                                <em style="margin-top:20px; margin-left: -100px; font-size: 10px;">{{ $comment->created_at->diffForHumans() }}
-                                                </em>
-                                                {{--                                                                @if(Auth::user())--}}
-                                                {{--                                                                    @if(Auth::user()->id == $post->user_id)--}}
+                                                @if($comment->userComment->userProfile->image_name != null)
+                                                    <img src="{{ asset('storage/user/'.$comment->userComment->userProfile->id.'/'.$comment->userComment->userProfile->image_name) }}" height="30" width="30" style="border-radius: 25px; border:1px solid purple;">
+                                                @else
+                                                    <i class="bi-person-circle text-info" style="font-size: 40px"></i>
+                                                @endif
+                                                    <div class="">
+                                                        <p class="mx-2" style="font-weight: bold; font-size: 13px;">{{ $comment->userComment->userProfile->firstname." ".$comment->userComment->userProfile->lastname }}</p>
+                                                <p class="mx-2" style="margin-top: -15px"><em style=" font-size: 10px;">{{ $comment->created_at->diffForHumans() }}
+                                                </em></p></div>
+                                                                                                                @if(Auth::user())
+                                                                                                                    @if(Auth::user()->id == $comment->user_id)
                                                 <form action="{{ route('comment.destroy', $comment) }}" method="POST"
                                                       onsubmit="return confirm('Are you sure you want to delete???')">
                                                     @csrf
@@ -170,11 +237,11 @@
                                                     <button class="ddd mx-5"
                                                             type="submit"><i class="bi-trash text-danger"></i></button>
                                                 </form>
-                                                {{--                                                                    @endif--}}
-                                                {{--                                                                @endif--}}
+                                                                                                                    @endif
+                                                                                                                @endif
                                             </div>
                                             <div class="d-flex justify-content-between">
-                                                <div class="mx-3">
+                                                <div class="mx-5">
                                                     <p style="font-size: 12px">{{ $comment->message }}</p>
                                                 </div>
 {{--                                                <div class="d-flex justify-content-end" style="width: 20%">--}}
@@ -215,7 +282,7 @@
                             <form method="post" action="{{ route('comment.store') }}">
                                         @csrf
                                         <div class="input-group">
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="form-control "
                                                    style="border: 1px solid black; border-radius: 0px"
                                                    placeholder="write a comment" name="message">
                                             <input type="hidden" class="form-control"
@@ -223,7 +290,7 @@
                                                    placeholder="write a comment" name="post_id" value="{{ $post->id }}">
                                             <input type="hidden" class="form-control"
                                                    style="border: 1px solid black; border-radius: 0px"
-                                                   placeholder="write a comment" name="user_id" value="1">
+                                                   placeholder="write a comment" name="user_id" value="{{ Auth::user()->id }}">
                                             <button class="position-relative border-info"><i
                                                     class="bi bi-arrow-right-circle-fill text-info"
                                                 ></i></button>
@@ -235,13 +302,65 @@
                         </div>
 
                     </div>
+        <script>
+            $(document).ready(function () {
 
+                var claVal1 = '.buttonLik-'+ {{ $post->id }};
+                var claVal2 = '.buttonDis-'+ {{ $post->id }};
+                $(claVal1).click(function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: '{{ route('likes') }}', // Replace with the actual URL of your backend API
+                        method: 'get', // Use POST or GET depending on your backend API
+                        data: {itemId: {{$post->id}}}, // Send the item ID to the server
+                        dataType: 'json',
+                        success: function (response) {
+                            // Update the count and icon color if the request was successful
+                            if (response.success) {
+                                $(claVal1).empty().html('<i class="bi-hand-thumbs-up-fill text-info"></i>'+" "+response.like + " Like");
+                                $(claVal2).empty().html('<i class="bi-hand-thumbs-down"></i>'+" "+response.DisLike + " Dislike");
+                                $(claVal1).prop("disabled", true);
+                                $(claVal2).prop("disabled", false);
+                            }
+                        },
+                    });
+                });
+                $(claVal2).click(function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: '{{ route('Dis') }}', // Replace with the actual URL of your backend API
+                        method: 'get', // Use POST or GET depending on your backend API
+                        data: {itemId: {{$post->id}}}, // Send the item ID to the server
+                        dataType: 'json',
+                        success: function (response) {
+                            // Update the count and icon color if the request was successful
+                            if (response.success) {
+                                $(claVal1).empty().html('<i class="bi-hand-thumbs-up"></i>'+" "+response.like + " Like");
+                                $(claVal2).empty().html('<i class="bi-hand-thumbs-down-fill text-danger"></i>'+" "+response.DisLike + " Dislike");
+                                $(claVal1).prop("disabled", false);
+                                $(claVal2).prop("disabled", true);
+                            }
+                        },
+                    });
+                });
+            });
+        </script>
         @endforeach
     </div>
     </div>
-    <div class="right-column m-2 p-2 position-sticky fixed-top" style="height: 200px">
+    <div class="right-column m-2 position-sticky fixed-top" style="height: fit-content;">
         <div class="">
-            Right Column
+            @foreach($mostLiked as $most)
+                <div class="rounded m-2 p-2" style="background-color: lightgrey; width: 300px">
+                    @if($most->user->userProfile->image_name != null)
+                        <img src="{{ asset('storage/user/'.$most->user->userProfile->id.'/'.$most->user->userProfile->image_name) }}" height="30" width="30" style="border-radius: 25px; border:1px solid purple;">
+                    @else
+                        <i class="bi-person-circle text-info" style="font-size: 25px"></i>
+                    @endif                                                <span class="mx-2" style="font-weight: bold; font-size: 13px;">{{ $most->user->userProfile->firstname." ".$most->user->userProfile->lastname }}</span>
+                    <h6>{{ $most->title }}</h6>
+                    <p>{{ \Illuminate\Support\Str::limit(strip_tags($most->message), 250, '...') }}</p>
+                </div>
+            @endforeach
         </div>
     </div>
     </div>
@@ -282,118 +401,6 @@
                 $(this).prev('.full-message').hide();
                 $(this).prev('.full-message').prev('.see-more').show();
             });
-
-            $(".button12").click(function(e) {
-                e.preventDefault();
-                var button = $(this);
-                var itemId = this.closest('.post').getAttribute('data-post-id');
-                // Send an AJAX request to update the database
-                $.ajax({
-                    url: '{{ route('likes') }}', // Replace with the actual URL of your backend API
-                    method: 'get', // Use POST or GET depending on your backend API
-                    data: { itemId: itemId }, // Send the item ID to the server
-                    dataType: 'json',
-                    success: function(response) {
-                        // Update the count and icon color if the request was successful
-                        if (response.success) {
-                            var post = button.closest('.post');
-                            var countElement = post.find(".count12");
-                            var countElement1 = post.find(".count21");
-                            var iconElement = button.find("i");
-
-                            countElement.empty().text(response.like);
-                            countElement1.empty().text(response.DisLike);
-                            countElement.text(response.like);
-                            countElement1.text(response.DisLike)
-
-                            // Change icon color (example: to green)
-                            iconElement.removeClass("bi-hand-thumbs-up");
-                            iconElement.addClass("bi-hand-thumbs-up-fill text-info");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-// Handle errors here
-                        console.log(xhr.responseText); // Log the full response text
-                        console.log(status); // Log the HTTP status code (e.g., 500)
-                        console.log(error); // Log the error message
-
-                        // You can also parse the JSON response if applicable
-                        try {
-                            var errorResponse = JSON.parse(xhr.responseText);
-                            console.log(errorResponse); // Log the parsed JSON response
-                        } catch (e) {
-                            console.log("Failed to parse error response as JSON");
-                        }
-                    }
-                    });
-            });
-
-            $(".button223").click(function(e) {
-                e.preventDefault();
-                var button = $(this);
-                var itemId = this.closest('.post').getAttribute('data-post-id');
-                // Send an AJAX request to update the database
-                $.ajax({
-                    url: '{{ route('Dis') }}', // Replace with the actual URL of your backend API
-                    method: 'get', // Use POST or GET depending on your backend API
-                    data: { itemId: itemId }, // Send the item ID to the server
-                    dataType: 'json',
-                    success: function(response) {
-                        // Update the count and icon color if the request was successful
-                        if (response.success) {
-                            var post = button.closest('.post');
-
-                            var countElement = post.find(".count12");
-                            var countElement1 = post.find(".count21");
-                            var iconElement = button.find("i");
-
-                            countElement.empty().text(response.like);
-                            countElement1.empty().text(response.DisLike);
-                            countElement.text(response.like);
-                            countElement1.text(response.DisLike)
-
-                            // Change icon color (example: to green)
-                            iconElement.removeClass("bi-hand-thumbs-down");
-                            iconElement.addClass("bi-hand-thumbs-down-fill text-danger");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-// Handle errors here
-                        console.log(xhr.responseText); // Log the full response text
-                        console.log(status); // Log the HTTP status code (e.g., 500)
-                        console.log(error); // Log the error message
-
-                        // You can also parse the JSON response if applicable
-                        try {
-                            var errorResponse = JSON.parse(xhr.responseText);
-                            console.log(errorResponse); // Log the parsed JSON response
-                        } catch (e) {
-                            console.log("Failed to parse error response as JSON");
-                        }
-                    }
-                });
-            });
-            // let countValue1 = 0;
-            // let countValue2 = 0;
-
-            {{--$(document).on('click', '.button1', function (e) {--}}
-            {{--    $.ajax({--}}
-            {{--       url: '{{ route('') }}',--}}
-            {{--       method:'get',--}}
-            {{--        data: {--}}
-            {{--           reaction: 0--}}
-            {{--        },--}}
-            {{--        dataType: 'json',--}}
-            {{--        success: function (response){--}}
-
-            {{--        }--}}
-            {{--    });--}}
-            {{--});--}}
-
-            // $(document).on('click', '.button2', function (e) {
-            //     countValue2++;
-            //     $('.count2').text(countValue2);
-            // });
 
             $('.ckeditor').ckeditor();
             $('#message').ckeditor({

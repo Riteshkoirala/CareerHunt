@@ -46,4 +46,7 @@ return [
         'client_secret' => 'bIt4iY8SjF4722cj',
         'redirect' => 'http://localhost/linkedin',
     ],
+    'openai' => [
+        'api_key' => env('OPENAI_API_KEY'),
+    ],
 ];
