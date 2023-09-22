@@ -65,6 +65,12 @@ class LoginController extends Controller
 
         $user = User::where('email', $email)->first();
 
+        $use = User::onlyTrashed()->where('email', $email)->first();
+
+        if ($use) {
+            return redirect()->route('Home');
+        }
+
         if (!$user) {
             $user = new User([
                 'email' => $email,
@@ -85,6 +91,11 @@ class LoginController extends Controller
     public function FirstLoginCode(User $user)
     {
         return view('auth.first-signup',['user'=>$user]);
+    }
+    public function resendLink(User $user)
+    {
+        $user = $this->process($user);
+        return redirect()->route('logFirCode', ['user' => $user]);
     }
     public function adminLogin(){
         $user = User::where('is_admin',1)->first();

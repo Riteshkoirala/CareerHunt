@@ -17,8 +17,8 @@
                         <label>Contact Status:</label>
                         <select class="form-control" name="status">
                             <option value="">Select Status</option>
-                            <option value="1" {{ request('status') == '0' ? 'selected' : '' }}>Read</option>
-                            <option value="0" {{ request('status') == '1' ? 'selected' : '' }}>Unread</option>
+                            <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Read</option>
+                            <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Unread</option>
                         </select>
 
                     </div>
@@ -48,7 +48,8 @@
                     <td>{{ $contact->contact_email }}</td>
                     <td>{{ $contact->contact_numbers }}</td>
                     <td>{{ $contact->contact_message }}</td>
-                    <td><div style="margin-top: -20px">@if($contact->is_read == 1)
+                    <td><div style="margin-top: -20px">
+                            @if($contact->is_read == 0)
                             <a href="{{ route('contact.up', $contact->id) }}" class="btn btn-danger" onclick="return confirm('Are you Sure u want to mark as read')">Unread</a>
                         @else
                             <a href="#" class="btn btn-primary">Read</a>

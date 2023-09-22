@@ -37,6 +37,7 @@ class CvController extends Controller
      */
     public function store(StoreCvRequest $request, ImageSaver $imageSaver)
     {
+
         $dataValidate = $request->validated();
         if($request->has('image') && $request->image != null) {
             $imageName = $imageSaver->imageStore($dataValidate, 'cv');

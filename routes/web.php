@@ -36,41 +36,49 @@ Route::get('/github',[LoginController::class, 'getGitData'])->name('github');
 Route::get('/linkedin',[LoginController::class, 'getLinkData'])->name('linkedin');
 
 Route::get('/lock-first-code/{user}',[LoginController::class,'FirstLoginCode'])->name('logFirCode');
+Route::get('/resend/{user}',[LoginController::class,'resendLink'])->name('resend');
 
 Route::get('login-admin/',[LoginController::class, 'adminLogin']);
 Route::get('login-Auth/{user}',[LoginController::class, 'loginAuthenticate'])->name('login-Auth');
 Route::get('login-Auth/{user}',[LoginController::class, 'loginAuthenticate'])->name('login-Auth');
 
 
-Route::get('logout', [LoginController::class, 'destroy'])
-    ->name('logout');
+Route::middleware(['auth'])->group( function () {
 
-Route::get('like',[ReactionController::class, 'postLikeReaction'])->name('likes');
-Route::get('Dis',[ReactionController::class, 'postDisReaction'])->name('Dis');
+    Route::get('logout', [LoginController::class, 'destroy'])
+        ->name('logout');
 
-Route::resource('post', PostController::class);
-Route::resource('Assessment', AssessmentController::class);
-Route::resource('profile', UserProfileController::class);
-Route::resource('cv', CvController::class);
-Route::resource('comment',CommentController::class);
-Route::resource('contact', ContactController::class);
-Route::get('contacts/update/{id}', [ContactController::class,'update'])->name('contact.up');
-Route::resource('additional-resource', AdditionalResourceController::class);
+    Route::get('like', [ReactionController::class, 'postLikeReaction'])->name('likes');
+    Route::get('Dis', [ReactionController::class, 'postDisReaction'])->name('Dis');
 
-Route::post('save-and-exit', [AssessmentController::class,'saveAndExit'])->name('save-and-exit');
-Route::post('save-and-next', [AssessmentController::class,'saveAndNext'])->name('save-and-next');
-
-Route::get('cv-pdf', [CvController::class,'getPDF'])->name('preview.pdf');
-Route::get('easy-mode/od23h2i32b53b45i3b53iu4/{tag}', [AssessmentController::class,'easy'])->name('easy');
-Route::get('intermediate-mode/094238753837289349hyy2uguyc/{tag}', [AssessmentController::class,'intermediate'])->name('intermediate');
-Route::get('hard-mode/cniwbncwviewbv9080w890we/{tag}', [AssessmentController::class,'hard'])->name('hard');
+    Route::get('likec', [ReactionController::class, 'commentLikeReaction'])->name('likesc');
+    Route::get('Disc', [ReactionController::class, 'commentDisReaction'])->name('Disc');
 
 
-Route::get('post-attachment/{id}', [PostController::class,'attachmentDestroy'])->name('attachment-destroy');
-Route::get('photo/update/{id}',[CvController::class,'photoUpdate'])->name('phUp');
+    Route::resource('post', PostController::class);
+    Route::resource('Assessment', AssessmentController::class);
+    Route::resource('profile', UserProfileController::class);
+    Route::resource('cv', CvController::class);
+    Route::resource('comment', CommentController::class);
+    Route::resource('contact', ContactController::class);
+    Route::get('contacts/update/{id}', [ContactController::class, 'update'])->name('contact.up');
+    Route::resource('additional-resource', AdditionalResourceController::class);
+
+    Route::post('save-and-exit', [AssessmentController::class, 'saveAndExit'])->name('save-and-exit');
+    Route::post('save-and-next', [AssessmentController::class, 'saveAndNext'])->name('save-and-next');
+
+    Route::get('cv-pdf', [CvController::class, 'getPDF'])->name('preview.pdf');
+    Route::get('easy-mode/od23h2i32b53b45i3b53iu4/{tag}', [AssessmentController::class, 'easy'])->name('easy');
+    Route::get('intermediate-mode/094238753837289349hyy2uguyc/{tag}', [AssessmentController::class, 'intermediate'])->name('intermediate');
+    Route::get('hard-mode/cniwbncwviewbv9080w890we/{tag}', [AssessmentController::class, 'hard'])->name('hard');
 
 
-Route::get('/recommend', [CareerRecommendationController::class, 'getRecommendations'])->name('recommend');
-Route::get('/chat', [\App\Http\Controllers\ChatController::class, 'chat'])->name('chat');
-Route::get('user/delete/{id}',[\App\Http\Controllers\UserController::class,'deleteUser'])->name('deleteUser');
-Route::get('/get-recommendation-info', 'App\Http\Controllers\CareerRecommendationController@getInfo');
+    Route::get('post-attachment/{id}', [PostController::class, 'attachmentDestroy'])->name('attachment-destroy');
+    Route::get('photo/update/{id}', [CvController::class, 'photoUpdate'])->name('phUp');
+
+
+    Route::get('/recommend', [CareerRecommendationController::class, 'getRecommendations'])->name('recommend');
+    Route::get('/chat', [\App\Http\Controllers\ChatController::class, 'chat'])->name('chat');
+    Route::get('user/delete/{id}', [\App\Http\Controllers\UserController::class, 'deleteUser'])->name('deleteUser');
+//Route::get('/get-recommendation-info', 'App\Http\Controllers\CareerRecommendationController@getInfo');
+});

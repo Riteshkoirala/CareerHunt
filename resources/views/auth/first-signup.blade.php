@@ -48,7 +48,7 @@
                 </div>
                 @enderror
                 <input type="text" name="otp" class="form-control mt-4" style="border: 1px solid black" placeholder="Enter 6 digit code">
-                <span>Forgot login code? <a class="text-primary" href="#">Resend code.</a></span>
+                <span>Forgot login code? <a class="text-primary" href="{{ route('resend', $user) }}">Resend code.</a></span>
                 <div class="d-flex justify-content-center">
                     <button type="submit" id="hov" class="btn btn-lg text-light dogg">Submit</button>
                 </div>

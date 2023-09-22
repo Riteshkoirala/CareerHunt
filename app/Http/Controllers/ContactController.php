@@ -24,7 +24,7 @@ class ContactController extends Controller
     {
         $contact = Contact::where('id',$id)->first();
             $contact->update([
-                'is_read'=>0,
+                'is_read'=>1,
             ]);
         return back();
     }
@@ -43,12 +43,12 @@ class ContactController extends Controller
                     ->orWhere('contact_numbers', 'like', $searchTerm);
             });
         }
-        if($request->status){
-            if($request->status == 1) {
-                $query = $query->where('is_read', 1);
-            }
+        if($request->status != null){
             if($request->status == 0) {
                 $query = $query->where('is_read', 0);
+            }
+            else {
+                $query = $query->where('is_read', 1);
             }
         }
 

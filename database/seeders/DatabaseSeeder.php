@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Profile\UserProfile;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,8 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-         \App\Models\User::create([
+         User::create([
              'id' => 1,
              'email' => 'admin@admin.gmail.com',
              'email_verified_at' => now(),
@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
              'is_admin'=>1,
          ]);
          UserProfile::create([
+             'user_id'=>1,
             'firstname' => 'Ritesh',
             'lastname' => 'Koirala',
             'skills' => 'PHP,JS'

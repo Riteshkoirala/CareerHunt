@@ -21,6 +21,15 @@
 
         </form>
         </div>
+        <div class="container bg-danger text-light p-3 m-3">
+            <div class="">
+                <h5>Notes: Most common knowledge should have  before joining any job.</h5>
+                <ul>
+                    <li>Basis of HTML, CSS, JS and some Database knowledge.</li>
+                    <li>Most have knowledge of Github.</li>
+                </ul>
+            </div>
+        </div>
         <div class="">
             <h1>Recommendations</h1>
 

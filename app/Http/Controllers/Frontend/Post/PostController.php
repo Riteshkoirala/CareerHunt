@@ -20,18 +20,24 @@ class PostController extends Controller
      */
     public function index()
     {
-      $posts = Post::latest()->filter(request(['search']))->get();
-        $mostLiked = Post::withCount(['UserReaction as LikeCount' => function ($query) {
-            $query->where('reaction', 1);
-        }])
-            ->orderByDesc('LikeCount')
-            ->take(3)
-            ->get();
+        $logUser = UserProfile::where('user_id', Auth::user()->id)->first();
+        if ($logUser) {
+            $posts = Post::latest()->filter(request(['search']))->get();
+            $mostLiked = Post::withCount(['UserReaction as LikeCount' => function ($query) {
+                $query->where('reaction', 1);
+            }])
+                ->orderByDesc('LikeCount')
+                ->take(3)
+                ->get();
 //        dd($mostLiked->title);
-        $user = User::where('id', Auth::user()->id)->first();
-        $users = User::get();
-        $ownPosts = Post::where('user_id',Auth::user()->id)->latest()->get();
-      return view('discussion.index', compact('posts','user','mostLiked','users','ownPosts'));
+            $user = User::where('id', Auth::user()->id)->first();
+            $users = User::orderBy('id')->skip(1)->take(PHP_INT_MAX)->get();
+            $ownPosts = Post::where('user_id', Auth::user()->id)->latest()->get();
+            return view('discussion.index', compact('posts', 'user', 'mostLiked', 'users', 'ownPosts'));
+        }
+        else{
+            return view('profile.create');
+        }
     }
 
     /**
@@ -49,7 +55,7 @@ class PostController extends Controller
     {
         $postStore->PostStore($request);
         session()->flash('successAlert', 'Successfully Post has been added.');
-        return redirect()->route('post.index')->with('success', 'Coupon code has been applied.');
+        return redirect()->route('post.index');
 ;
     }
 
