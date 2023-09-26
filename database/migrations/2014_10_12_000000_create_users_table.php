@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //this is the database structure of the user as seen here this is
+        //use to create the database
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();

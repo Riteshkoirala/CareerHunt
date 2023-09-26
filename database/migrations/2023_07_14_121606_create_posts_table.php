@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //this is the database structure of the post as seen here this is
+        //use to create the database
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');

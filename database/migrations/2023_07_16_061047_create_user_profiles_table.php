@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //this is the database structure of the user_profile as seen here this is
+        //use to create the database
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');

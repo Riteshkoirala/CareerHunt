@@ -28,36 +28,7 @@ data = pd.DataFrame({
 })
 
 skills_list = data["Key Skills"].tolist()
-# TF-IDF Vectorization
-# tfidf_vectorizer = TfidfVectorizer(stop_words="english")
-# tfidf_matrix = tfidf_vectorizer.fit_transform(skills_list)
 
-# from sklearn.decomposition import TruncatedSVD
-# from sklearn.preprocessing import normalize
-# from sklearn.metrics.pairwise import cosine_similarity
-# import numpy as np
-# import pandas as pd
-
-# Load your data here
-
-# # Create a subset of your data by randomly sampling
-# sample_size = 15000  # Adjust the sample size as needed
-# sampled_data = data.sample(n=sample_size, random_state=42)
-#
-# # Extract the 'Key Skills' from the sampled data
-# sampled_skills_list = sampled_data['Key Skills'].tolist()
-#
-# # TF-IDF Vectorization
-# tfidf_vectorizer = TfidfVectorizer(stop_words="english")
-# tfidf_matrix = tfidf_vectorizer.fit_transform(sampled_skills_list)
-#
-# # Further reduce dimensionality with TruncatedSVD
-# n_components = 50  # Adjust the number of components as needed
-# svd = TruncatedSVD(n_components=n_components)
-# tfidf_matrix_reduced = svd.fit_transform(tfidf_matrix)
-#
-# # Normalize the reduced matrix
-# tfidf_matrix_reduced_normalized = normalize(tfidf_matrix_reduced)
 
 # Compute cosine similarity on the reduced and normalized matrix
 tfidf_vectorizer = TfidfVectorizer(stop_words="english")

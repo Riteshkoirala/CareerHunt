@@ -30,7 +30,7 @@
             </div>
             <div class="personal-details-container border rounded p-4 mt-2">
                 <h4 class="mb-3">Personal Details:</h4>
-                <input type="hidden" name="user_id" value="1">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <div class="d-flex justify-content-evenly">
                     <div class="col-md-4">
                         <label for="fullname" class="form-label">Full Name</label>

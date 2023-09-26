@@ -60,7 +60,7 @@
         <div class="center-column me-2" style="width: 70%">
             <div class="top-row mb-2 text-white" style="background-color: #7ea9e8">
                 <div>
-                    <form>
+                    <form action="{{ route('post.index') }}" method="get">
                         <div class="d-flex">
                             <input type="text" name="search" value="{{ request('search') }}" class="form-control"
                                    placeholder="Search for the post here?">

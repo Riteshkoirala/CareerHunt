@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //this is the database structure of the contact as seen here this is
+        //use to create the database
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->string('contact_fullname');

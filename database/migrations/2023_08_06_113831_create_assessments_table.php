@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //this is the database structure of the assessment as seen here this is
+        //use to create the database
         Schema::create('assessments', function (Blueprint $table) {
             $table->id();
             $table->longText('question');

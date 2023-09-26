@@ -42,6 +42,7 @@ Route::get('login-admin/',[LoginController::class, 'adminLogin']);
 Route::get('login-Auth/{user}',[LoginController::class, 'loginAuthenticate'])->name('login-Auth');
 Route::get('login-Auth/{user}',[LoginController::class, 'loginAuthenticate'])->name('login-Auth');
 
+Route::resource('contact', ContactController::class);
 
 Route::middleware(['auth'])->group( function () {
 
@@ -60,7 +61,6 @@ Route::middleware(['auth'])->group( function () {
     Route::resource('profile', UserProfileController::class);
     Route::resource('cv', CvController::class);
     Route::resource('comment', CommentController::class);
-    Route::resource('contact', ContactController::class);
     Route::get('contacts/update/{id}', [ContactController::class, 'update'])->name('contact.up');
     Route::resource('additional-resource', AdditionalResourceController::class);
 
