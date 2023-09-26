@@ -21,6 +21,8 @@ class ContactRequest extends FormRequest
      */
     public function rules(): array
     {
+        //these are the validation of the data that comes form the front of the form
+
         return [
             'contact_fullname'=>'required|string',
             'contact_email'=>'required|email',

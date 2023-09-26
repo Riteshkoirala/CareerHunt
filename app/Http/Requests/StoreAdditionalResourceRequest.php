@@ -21,6 +21,7 @@ class StoreAdditionalResourceRequest extends FormRequest
      */
     public function rules(): array
     {
+        //these are the validation of the data that comes form the front of the form
         return [
             'title'=>'string|required',
             'image' => 'required|mimetypes:image/jpeg,image/png,image/jpg',

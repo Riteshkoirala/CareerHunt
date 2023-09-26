@@ -14,7 +14,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use HasFactory, SoftDeletes;
-
+    //this is the database handling of the post page
+    //where we can see or allow only this column in the database can be added
     protected $fillable = [
         'title',
         'message',
@@ -24,24 +25,28 @@ class Post extends Model
 
     public function scopeFilter($query, array $filters)
     {
+        //this is to apply filter in the front
         if ($filters['search'] ?? false) {
             $query->where('title', 'like', '%' . request('search') . '%')
                 ->orWhere('message', 'like', '%' . request('search') . '%');
         }
     }
+    //this is to the  relation post and postimages table
     public function postImages():HasMany
     {
         return $this->hasMany(PostImage::class,'post_id','id');
     }
-
+    //this is to the  relation post and post comment table
     public function postComment():HasMany
     {
         return $this->hasMany(Comments::class,'post_id', 'id');
     }
+    //this is to the  relation post and user table
     public function user():HasOne
     {
         return $this->hasOne(User::class,'id','user_id');
     }
+    //this is to the  relation post and raction to the post table
 
     public function UserReaction():BelongsToMany
     {

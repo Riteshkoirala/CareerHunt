@@ -14,53 +14,42 @@ use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
+        //to check if the user has created the profile or not
         $logUser = UserProfile::where('user_id',Auth::user()->id)->first();
         if ($logUser) {
+            //if yes then redirected to the profile page
             $profile = UserProfile::where('user_id', Auth::user()->id)->first();
             return view('profile.index', ['profile'=> $profile]);
         }
+        //if not then to the profile create page
         else{
             return view('profile.create');
         }
-
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
+        //profile creating page
         return view('profile.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(UserProfileStoreRequest $request, profileCreation $profileCreation)
     {
+        //this helps to create the profile
         $profileCreation->profileStore($request);
         return redirect()->route('Home');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
+        //this helps to edit the profile
         $profile = UserProfile::where('user_id', Auth::user()->id)->first();
         return view('profile.edit', ['profile'=> $profile]);
     }
@@ -70,15 +59,10 @@ class UserProfileController extends Controller
      */
     public function update(UserProfileStoreRequest $request,UserProfile $profile, profileCreation $profileCreation)
     {
+        //this is the profile update function
         $profileCreation->profileUpdate($request, $profile);
         return redirect()->route('profile.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+
 }

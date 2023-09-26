@@ -21,6 +21,7 @@ class CommentRequest extends FormRequest
      */
     public function rules(): array
     {
+        //these are the validation of the data that comes form the front of the form
         return [
             'message'=>'required',
             'user_id'=>'required',

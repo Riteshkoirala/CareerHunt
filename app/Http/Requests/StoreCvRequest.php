@@ -21,6 +21,7 @@ class StoreCvRequest extends FormRequest
      */
     public function rules(): array
     {
+        //these are the validation of the data that comes form the front of the form
         return [
             'user_id' => 'required',
             'fullname'=>'nullable|string',

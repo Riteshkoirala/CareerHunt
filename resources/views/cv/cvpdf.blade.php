@@ -105,10 +105,7 @@
 
             <ul>
                 <li>
-                    Java
-                </li>
-                <li>
-                    PHP
+                    {{ $cvData->skills }}
                 </li>
             </ul>
                 @endif
@@ -119,10 +116,7 @@
 
             <ul>
                 <li>
-                    English
-                </li>
-                <li>
-                    Nepali
+                 {{ $cvData->language }}
                 </li>
             </ul>
                 @endif

@@ -21,6 +21,7 @@ class StorePostRequest extends FormRequest
      */
     public function rules(): array
     {
+        //these are the validation of the data that comes form the front of the form
         return [
             'title'=>'required|min:5|string',
             'message'=>'required|max:1000',
